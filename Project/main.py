@@ -21,6 +21,8 @@ def display_Scenario1():
     pygame.draw.rect(screen, '#ffffff', ((0, 520), (1200, 540)), 10, 1)
     pygame.draw.line(screen, '#ffffff', (0, 695), (1200, 695), 10)
     screen.blit(BackButton_surf, BackButton_rect)
+    screen.blit(bridgeScenarioOne_surf, bridgeScenarioOne_rect)
+
 
 
 def display_Scenario2():
@@ -82,6 +84,10 @@ ScenarioThreeSelect_rect = ScenarioThreeSelect_surf.get_rect(topleft=(200, 450))
 groundScenarioOne_surf = pygame.image.load('Graphics/Ground.png').convert_alpha()
 groundScenarioOne_surf = pygame.transform.scale(groundScenarioOne_surf, (1200, 300))
 groundScenarioOne_rect = groundScenarioOne_surf.get_rect(topleft=(0, 300))
+
+bridgeScenarioOne_surf = pygame.image.load('Graphics/Scenario1/Bridge.png').convert_alpha()
+bridgeScenarioOne_surf = pygame.transform.scale(bridgeScenarioOne_surf, (1200, 300))
+bridgeScenarioOne_rect = bridgeScenarioOne_surf.get_rect(topleft=(0, 100))
 
 BackButton_surf = pygame.image.load('Graphics/Back.png').convert_alpha()
 BackButton_surf = pygame.transform.scale(BackButton_surf, (150, 70))
