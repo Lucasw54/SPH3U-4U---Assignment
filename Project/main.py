@@ -14,11 +14,29 @@ def display_ScoreSelect():
 
     screen.blit(ScenarioThreeSelect_surf, ScenarioThreeSelect_rect)
 
+
 def display_Scenario1():
-    print("HI")
+    screen.blit(groundScenarioOne_surf, groundScenarioOne_rect)
+    pygame.draw.rect(screen, '#000000', ((0, 520), (1200, 700)), 1000, 1)
+    pygame.draw.rect(screen, '#ffffff', ((0, 520), (1200, 540)), 10, 1)
+    pygame.draw.line(screen, '#ffffff', (0, 695), (1200, 695), 10)
+    screen.blit(BackButton_surf, BackButton_rect)
+
 
 def display_Scenario2():
-    print("Jo")
+    screen.blit(groundScenarioOne_surf, (0, 400))
+    pygame.draw.rect(screen, '#000000', ((0, 520), (1200, 700)), 1000, 1)
+    pygame.draw.rect(screen, '#ffffff', ((0, 520), (1200, 540)), 10, 1)
+    pygame.draw.line(screen, '#ffffff', (0, 695), (1200, 695), 10)
+    screen.blit(BackButton_surf, BackButton_rect)
+
+
+def display_Scenario3():
+    screen.blit(groundScenarioOne_surf, (0, 500))
+    pygame.draw.rect(screen, '#000000', ((0, 520), (1200, 700)), 1000, 1)
+    pygame.draw.rect(screen, '#ffffff', ((0, 520), (1200, 540)), 10, 1)
+    pygame.draw.line(screen, '#ffffff', (0, 695), (1200, 695), 10)
+    screen.blit(BackButton_surf, BackButton_rect)
 
 
 pygame.init()
@@ -62,6 +80,12 @@ ScenarioThreeSelect_rect = ScenarioThreeSelect_surf.get_rect(topleft=(200, 450))
 
 #  Scenario 1
 groundScenarioOne_surf = pygame.image.load('Graphics/Ground.png').convert_alpha()
+groundScenarioOne_surf = pygame.transform.scale(groundScenarioOne_surf, (1200, 300))
+groundScenarioOne_rect = groundScenarioOne_surf.get_rect(topleft=(0, 300))
+
+BackButton_surf = pygame.image.load('Graphics/Back.png').convert_alpha()
+BackButton_surf = pygame.transform.scale(BackButton_surf, (150, 70))
+BackButton_rect = BackButton_surf.get_rect(topleft=(0, 0))
 
 while True:
     for event in pygame.event.get():
@@ -73,26 +97,54 @@ while True:
             mouse_pos = pygame.mouse.get_pos()
             if event.type == pygame.MOUSEBUTTONDOWN and ScenarioOneSelect_rect.collidepoint(mouse_pos):
                 ScenarioSelect_active = False
-                ScenarioOne_active = True
                 pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
+                ScenarioOne_active = True
 
+            if event.type == pygame.MOUSEBUTTONDOWN and ScenarioTwoSelect_rect.collidepoint(mouse_pos):
+                ScenarioSelect_active = False
+                pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
+                ScenarioTwo_active = True
+
+            if event.type == pygame.MOUSEBUTTONDOWN and ScenarioThreeSelect_rect.collidepoint(mouse_pos):
+                ScenarioSelect_active = False
+                pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
+                ScenarioThree_active = True
+
+        if ScenarioOne_active:
+            mouse_pos = pygame.mouse.get_pos()
+            if event.type == pygame.MOUSEBUTTONDOWN and BackButton_rect.collidepoint(mouse_pos):
+                ScenarioOne_active = False
+                pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
+                ScenarioSelect_active = True
+
+        if ScenarioTwo_active:
+            mouse_pos = pygame.mouse.get_pos()
+            if event.type == pygame.MOUSEBUTTONDOWN and BackButton_rect.collidepoint(mouse_pos):
+                ScenarioTwo_active = False
+                pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
+                ScenarioSelect_active = True
+
+        if ScenarioThree_active:
+            mouse_pos = pygame.mouse.get_pos()
+            if event.type == pygame.MOUSEBUTTONDOWN and BackButton_rect.collidepoint(mouse_pos):
+                ScenarioThree_active = False
+                pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
+                ScenarioSelect_active = True
 
     if ScenarioSelect_active:
+        pygame.draw.rect(screen, '#000000', ((0, 0), (1200, 700)), 0, 1)
         pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 110, 1)
         display_ScoreSelect()
 
     else:
         if ScenarioOne_active:
-            screen.blit(groundScenarioOne_surf, (0, 300))
-            print("Scenario 1")
+            display_Scenario1()
 
         if ScenarioTwo_active:
-            screen.blit(groundScenarioOne_surf, (0, 400))  # change to Scenario two ground
-            print("Scenario 2")
+            display_Scenario2()
 
         if ScenarioThree_active:
-            screen.blit(groundScenarioOne_surf, (0, 500))  # change to Scenario three ground
-            print("Scenario 3")
+            display_Scenario3()
 
     pygame.display.update()
     clock.tick(60)
