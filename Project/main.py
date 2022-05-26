@@ -22,8 +22,10 @@ def display_Scenario1():
     pygame.draw.line(screen, '#ffffff', (0, 695), (1200, 695), 10)
     screen.blit(BackButton_surf, BackButton_rect)
     screen.blit(bridgeScenarioOne_surf, bridgeScenarioOne_rect)
-
-
+    screen.blit(PhysicsInfo_surf, PhysicsInfo_rect)
+    pygame.draw.line(screen, '#ffffff', (18, 570), (290, 570), 4)
+    screen.blit(DistanceFromGround_surf, DistanceFromGround_rect)
+    screen.blit(MassDropped_surf, MassDropped_rect)
 
 def display_Scenario2():
     screen.blit(groundScenarioOne_surf, (0, 400))
@@ -49,6 +51,9 @@ titleshadow_font = pygame.font.Font('Fonts/OpenSans-Bold.ttf', 71)
 title_font = pygame.font.Font('Fonts/OpenSans-Bold.ttf', 70)
 scenarioSelect_font = pygame.font.Font('Fonts/OpenSans-Bold.ttf', 50)
 scenarios_font = pygame.font.Font('Fonts/AovelSansRounded-rdDL.ttf', 30)
+PhysicsInfo_font = pygame.font.Font('Fonts/AovelSansRounded-rdDL.ttf', 34)
+DistanceFromGround_font = pygame.font.Font('Fonts/AovelSansRounded-rdDL.ttf', 25)
+
 ScenarioOne_active = False
 ScenarioTwo_active = False
 ScenarioThree_active = False
@@ -92,6 +97,15 @@ bridgeScenarioOne_rect = bridgeScenarioOne_surf.get_rect(topleft=(0, 100))
 BackButton_surf = pygame.image.load('Graphics/Back.png').convert_alpha()
 BackButton_surf = pygame.transform.scale(BackButton_surf, (150, 70))
 BackButton_rect = BackButton_surf.get_rect(topleft=(0, 0))
+
+PhysicsInfo_surf = PhysicsInfo_font.render("Physics Information", False, (255, 255, 255))
+PhysicsInfo_rect = PhysicsInfo_surf.get_rect(topleft=(30, 535))
+
+DistanceFromGround_surf = DistanceFromGround_font.render("Distance from ground", False, (255, 255, 255))
+DistanceFromGround_rect = DistanceFromGround_surf.get_rect(topleft=(50, 595))
+
+MassDropped_surf = DistanceFromGround_font.render("Mass of Object", False, (255, 255, 255))
+MassDropped_rect = MassDropped_surf.get_rect(topleft=(50, 640))
 
 while True:
     for event in pygame.event.get():
