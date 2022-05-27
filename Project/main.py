@@ -28,26 +28,38 @@ def display_Scenario1():
     screen.blit(MassDropped_surf, MassDropped_rect)
     screen.blit(UpArrowDistance_surf, UpArrowDistance_rect)
     screen.blit(DownArrowDistance_surf, DownArrowDistance_rect)
-    screen.blit(DistanceFromGroundNum_surf, DistanceFromGroundNum_rect)
     pygame.draw.line(screen, '#ffffff', (722, 102), (722, 396), 4)
     pygame.draw.line(screen, '#ffffff', (682, 396), (762, 396), 4)
     pygame.draw.line(screen, '#ffffff', (682, 102), (762, 102), 4)
-    screen.blit(DistanceFromGroundMeasurement_surf, DistanceFromGroundMeasurement_rect)
     screen.blit(DistanceFromGroundMeasurementUnits_surf, DistanceFromGroundMeasurementUnits_rect)
     screen.blit(UpArrowMass_surf, UpArrowMass_rect)
     screen.blit(DownArrowMass_surf, DownArrowMass_rect)
-    screen.blit(MassDroppedNum_surf, MassDroppedNum_rect)
-    pygame.draw.circle(screen, '#ffffff', (600, 70), 30)
-    screen.blit(MassDroppedMeasurement_surf, MassDroppedMeasurement_rect)
-    screen.blit(MassDroppedMeasurementUnits_surf, MassDroppedMeasurementUnits_rect)
     screen.blit(StartButtonScen1_surf, StartButtonScen1_rect)
 
 
-def Time():
-    current_time = pygame.time.get_ticks()-start_time
-    score_surf = DistanceFromGround_font.render(f'{current_time}', False, (255, 255, 255))
-    score_rect = score_surf.get_rect(center=(400, 50))
-    screen.blit(score_surf, score_rect)
+def Scenario1ValuesUpdate():
+    pygame.draw.circle(screen, '#ffffff', (600, DroppedMassHeight), 30)
+    screen.blit(MassDroppedMeasurementUnits_surf, MassDroppedMeasurementUnits_rect)
+
+    DistanceFromGroundNum_surf = Value_font.render(f'{DistanceFromGroundValue}', False, (255, 255, 255))
+    DistanceFromGroundNum_rect = DistanceFromGroundNum_surf.get_rect(topleft=(20, 593))
+    screen.blit(DistanceFromGroundNum_surf, DistanceFromGroundNum_rect)
+
+    DistanceFromGroundMeasurement_surf = Value_font.render(f'{DistanceFromGroundValue}', False, (0, 0, 0))
+    DistanceFromGroundMeasurement_rect = DistanceFromGroundMeasurement_surf.get_rect(topleft=(740, 250))
+    screen.blit(DistanceFromGroundMeasurement_surf, DistanceFromGroundMeasurement_rect)
+
+    MassDroppedNum_surf = Value_font.render(f'{MassDroppedValue}', False, (255, 255, 255))
+    MassDroppedNum_rect = MassDroppedNum_surf.get_rect(topleft=(20, 643))
+    screen.blit(MassDroppedNum_surf, MassDroppedNum_rect)
+
+    MassDroppedMeasurement_surf = Value_font.render(f'{MassDroppedValue}', False, (0, 0, 0))
+    MassDroppedMeasurement_rect = MassDroppedMeasurement_surf.get_rect(topleft=(575, 55))
+    screen.blit(MassDroppedMeasurement_surf, MassDroppedMeasurement_rect)
+
+
+def Scenario1Action():
+    pygame.draw.circle(screen, '#ffffff', (600, DroppedMassHeight), 30)
 
 
 def display_Scenario2():
@@ -79,12 +91,16 @@ DistanceFromGround_font = pygame.font.Font('Fonts/AovelSansRounded-rdDL.ttf', 25
 Value_font = pygame.font.Font('Fonts/AovelSansRounded-rdDL.ttf', 20)
 
 ScenarioOne_active = False
+ScenarioOneAction = False
 ScenarioTwo_active = False
 ScenarioThree_active = False
 ScenarioSelect_active = True
 start_time = 0
+DistanceFromGroundValue = 40
+MassDroppedValue = 10
+DroppedMassHeight = 70
 
-#Intro Screen
+# Intro Screen
 title_surf = title_font.render("Simulated Physics Environment", False, (255, 255, 255))
 title_rect = title_surf.get_rect(topleft=(10, 0))
 
@@ -128,10 +144,6 @@ PhysicsInfo_rect = PhysicsInfo_surf.get_rect(topleft=(30, 535))
 DistanceFromGround_surf = DistanceFromGround_font.render("Distance from ground", False, (255, 255, 255))
 DistanceFromGround_rect = DistanceFromGround_surf.get_rect(topleft=(50, 593))
 
-DistanceFromGroundValue = 40
-DistanceFromGroundNum_surf = Value_font.render(f'{DistanceFromGroundValue}', False, (255, 255, 255))
-DistanceFromGroundNum_rect = DistanceFromGroundNum_surf.get_rect(topleft=(20, 593))
-
 UpArrowDistance_surf = pygame.image.load('Graphics/UpAndDownArrows/UpArrow.png').convert_alpha()
 UpArrowDistance_surf = pygame.transform.scale(UpArrowDistance_surf, (80, 30))
 UpArrowDistance_rect = UpArrowDistance_surf.get_rect(topleft=(0, 575))
@@ -143,13 +155,6 @@ DownArrowDistance_rect = DownArrowDistance_surf.get_rect(topleft=(-18, 605))
 MassDropped_surf = DistanceFromGround_font.render("Mass of Object", False, (255, 255, 255))
 MassDropped_rect = MassDropped_surf.get_rect(topleft=(50, 643))
 
-MassDroppedValue = 10
-MassDroppedNum_surf = Value_font.render(f'{MassDroppedValue}', False, (255, 255, 255))
-MassDroppedNum_rect = MassDroppedNum_surf.get_rect(topleft=(20, 643))
-
-MassDroppedMeasurement_surf = Value_font.render(f'{MassDroppedValue}', False, (0, 0, 0))
-MassDroppedMeasurement_rect = MassDroppedMeasurement_surf.get_rect(topleft=(575, 55))
-
 MassDroppedMeasurementUnits_surf = Value_font.render("Kg", False, (0, 0, 0))
 MassDroppedMeasurementUnits_rect = MassDroppedMeasurementUnits_surf.get_rect(topleft=(605, 55))
 
@@ -160,9 +165,6 @@ UpArrowMass_rect = UpArrowMass_surf.get_rect(topleft=(0, 625))
 DownArrowMass_surf = pygame.image.load('Graphics/UpAndDownArrows/DownArrow.png').convert_alpha()
 DownArrowMass_surf = pygame.transform.scale(DownArrowMass_surf, (80, 30))
 DownArrowMass_rect = DownArrowMass_surf.get_rect(topleft=(-18, 655))
-
-DistanceFromGroundMeasurement_surf = Value_font.render(f'{DistanceFromGroundValue}', False, (0, 0, 0))
-DistanceFromGroundMeasurement_rect = DistanceFromGroundMeasurement_surf.get_rect(topleft=(740, 250))
 
 DistanceFromGroundMeasurementUnits_surf = Value_font.render("m", False, (0, 0, 0))
 DistanceFromGroundMeasurementUnits_rect = DistanceFromGroundMeasurementUnits_surf.get_rect(topleft=(770, 250))
@@ -202,8 +204,22 @@ while True:
                 ScenarioSelect_active = True
 
             if event.type == pygame.MOUSEBUTTONDOWN and StartButtonScen1_rect.collidepoint(mouse_pos):
-                DistanceFromGroundValue = 60
-                print(DistanceFromGroundValue)
+                ScenarioOneAction = True
+
+            if event.type == pygame.MOUSEBUTTONDOWN and UpArrowDistance_rect.collidepoint(mouse_pos):
+                DistanceFromGroundValue += 1
+
+            if event.type == pygame.MOUSEBUTTONDOWN and DownArrowDistance_rect.collidepoint(mouse_pos):
+                DistanceFromGroundValue -= 1
+
+            if event.type == pygame.MOUSEBUTTONDOWN and UpArrowMass_rect.collidepoint(mouse_pos):
+                MassDroppedValue += 1
+
+            if event.type == pygame.MOUSEBUTTONDOWN and DownArrowMass_rect.collidepoint(mouse_pos):
+                MassDroppedValue -= 1
+
+        if ScenarioOneAction:
+            print("JHI")
 
         if ScenarioTwo_active:
             mouse_pos = pygame.mouse.get_pos()
@@ -225,9 +241,15 @@ while True:
         display_ScoreSelect()
 
     if ScenarioOne_active:
-        pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
-        display_Scenario1()
-        Time()
+        if ScenarioOneAction:
+            pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
+            display_Scenario1()
+            Scenario1Action()
+
+        else:
+            pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
+            display_Scenario1()
+            Scenario1ValuesUpdate()
 
     if ScenarioTwo_active:
         pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
@@ -236,6 +258,6 @@ while True:
     if ScenarioThree_active:
         pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
         display_Scenario3()
-        
+
     pygame.display.update()
     clock.tick(60)
