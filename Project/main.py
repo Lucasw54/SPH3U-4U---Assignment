@@ -29,11 +29,18 @@ def display_Scenario1():
     screen.blit(UpArrowDistance_surf, UpArrowDistance_rect)
     screen.blit(DownArrowDistance_surf, DownArrowDistance_rect)
     screen.blit(DistanceFromGroundNum_surf, DistanceFromGroundNum_rect)
-    pygame.draw.line(screen, '#ffffff', (722, 109), (722, 396), 4)
+    pygame.draw.line(screen, '#ffffff', (722, 102), (722, 396), 4)
     pygame.draw.line(screen, '#ffffff', (682, 396), (762, 396), 4)
-    pygame.draw.line(screen, '#ffffff', (682, 109), (762, 109), 4)
+    pygame.draw.line(screen, '#ffffff', (682, 102), (762, 102), 4)
     screen.blit(DistanceFromGroundMeasurement_surf, DistanceFromGroundMeasurement_rect)
     screen.blit(DistanceFromGroundMeasurementUnits_surf, DistanceFromGroundMeasurementUnits_rect)
+    screen.blit(UpArrowMass_surf, UpArrowMass_rect)
+    screen.blit(DownArrowMass_surf, DownArrowMass_rect)
+    screen.blit(MassDroppedNum_surf, MassDroppedNum_rect)
+    pygame.draw.circle(screen, '#ffffff', (600, 70), 30)
+    screen.blit(MassDroppedMeasurement_surf, MassDroppedMeasurement_rect)
+    screen.blit(MassDroppedMeasurementUnits_surf, MassDroppedMeasurementUnits_rect)
+    screen.blit(StartButtonScen1_surf, StartButtonScen1_rect)
 
 def display_Scenario2():
     screen.blit(groundScenarioOne_surf, (0, 400))
@@ -79,18 +86,18 @@ titleshadow_rect = titleshadow_surf.get_rect(topleft=(10, 5))
 chooseScenario_surf = scenarioSelect_font.render("Choose a Scenario", False, (255, 255, 255))
 chooseScenario_rect = chooseScenario_surf.get_rect(center=(400, 150))
 
-ScenarioOneSelect_surf = pygame.image.load('Graphics/SelectButtons/SelectGrey.png').convert_alpha()
+ScenarioOneSelect_surf = pygame.image.load('Graphics/Buttons/SelectGrey.png').convert_alpha()
 ScenarioOneSelect_surf = pygame.transform.scale(ScenarioOneSelect_surf, (200, 75))
 ScenarioOneSelect_rect = ScenarioOneSelect_surf.get_rect(topleft=(200, 190))
 
 ScenarioOneText_surf = scenarios_font.render("An object dropping of a bridge", False, (255, 255, 255))
 ScenarioOneText_rect = ScenarioOneText_surf.get_rect(topleft=(400, 210))
 
-ScenarioTwoSelect_surf = pygame.image.load('Graphics/SelectButtons/SelectGrey.png').convert_alpha()
+ScenarioTwoSelect_surf = pygame.image.load('Graphics/Buttons/SelectGrey.png').convert_alpha()
 ScenarioTwoSelect_surf = pygame.transform.scale(ScenarioTwoSelect_surf, (200, 75))
 ScenarioTwoSelect_rect = ScenarioTwoSelect_surf.get_rect(topleft=(200, 320))
 
-ScenarioThreeSelect_surf = pygame.image.load('Graphics/SelectButtons/SelectGrey.png').convert_alpha()
+ScenarioThreeSelect_surf = pygame.image.load('Graphics/Buttons/SelectGrey.png').convert_alpha()
 ScenarioThreeSelect_surf = pygame.transform.scale(ScenarioThreeSelect_surf, (200, 75))
 ScenarioThreeSelect_rect = ScenarioThreeSelect_surf.get_rect(topleft=(200, 450))
 
@@ -113,8 +120,9 @@ PhysicsInfo_rect = PhysicsInfo_surf.get_rect(topleft=(30, 535))
 DistanceFromGround_surf = DistanceFromGround_font.render("Distance from ground", False, (255, 255, 255))
 DistanceFromGround_rect = DistanceFromGround_surf.get_rect(topleft=(50, 593))
 
-MassDropped_surf = DistanceFromGround_font.render("Mass of Object", False, (255, 255, 255))
-MassDropped_rect = MassDropped_surf.get_rect(topleft=(50, 640))
+DistanceFromGroundValue = 40
+DistanceFromGroundNum_surf = Value_font.render(f'{DistanceFromGroundValue}', False, (255, 255, 255))
+DistanceFromGroundNum_rect = DistanceFromGroundNum_surf.get_rect(topleft=(20, 593))
 
 UpArrowDistance_surf = pygame.image.load('Graphics/UpAndDownArrows/UpArrow.png').convert_alpha()
 UpArrowDistance_surf = pygame.transform.scale(UpArrowDistance_surf, (80, 30))
@@ -124,15 +132,36 @@ DownArrowDistance_surf = pygame.image.load('Graphics/UpAndDownArrows/DownArrow.p
 DownArrowDistance_surf = pygame.transform.scale(DownArrowDistance_surf, (80, 30))
 DownArrowDistance_rect = DownArrowDistance_surf.get_rect(topleft=(-18, 605))
 
-DistanceFromGroundValue = 40
-DistanceFromGroundNum_surf = Value_font.render(f'{DistanceFromGroundValue}', False, (255, 255, 255))
-DistanceFromGroundNum_rect = DistanceFromGroundNum_surf.get_rect(topleft=(20, 593))
+MassDropped_surf = DistanceFromGround_font.render("Mass of Object", False, (255, 255, 255))
+MassDropped_rect = MassDropped_surf.get_rect(topleft=(50, 643))
+
+MassDroppedValue = 10
+MassDroppedNum_surf = Value_font.render(f'{MassDroppedValue}', False, (255, 255, 255))
+MassDroppedNum_rect = MassDroppedNum_surf.get_rect(topleft=(20, 643))
+
+MassDroppedMeasurement_surf = Value_font.render(f'{MassDroppedValue}', False, (0, 0, 0))
+MassDroppedMeasurement_rect = MassDroppedMeasurement_surf.get_rect(topleft=(575, 55))
+
+MassDroppedMeasurementUnits_surf = Value_font.render("Kg", False, (0, 0, 0))
+MassDroppedMeasurementUnits_rect = MassDroppedMeasurementUnits_surf.get_rect(topleft=(605, 55))
+
+UpArrowMass_surf = pygame.image.load('Graphics/UpAndDownArrows/UpArrow.png').convert_alpha()
+UpArrowMass_surf = pygame.transform.scale(UpArrowMass_surf, (80, 30))
+UpArrowMass_rect = UpArrowMass_surf.get_rect(topleft=(0, 625))
+
+DownArrowMass_surf = pygame.image.load('Graphics/UpAndDownArrows/DownArrow.png').convert_alpha()
+DownArrowMass_surf = pygame.transform.scale(DownArrowMass_surf, (80, 30))
+DownArrowMass_rect = DownArrowMass_surf.get_rect(topleft=(-18, 655))
 
 DistanceFromGroundMeasurement_surf = Value_font.render(f'{DistanceFromGroundValue}', False, (0, 0, 0))
 DistanceFromGroundMeasurement_rect = DistanceFromGroundMeasurement_surf.get_rect(topleft=(740, 250))
 
 DistanceFromGroundMeasurementUnits_surf = Value_font.render("m", False, (0, 0, 0))
 DistanceFromGroundMeasurementUnits_rect = DistanceFromGroundMeasurementUnits_surf.get_rect(topleft=(770, 250))
+
+StartButtonScen1_surf = pygame.image.load('Graphics/Start.png').convert_alpha()
+StartButtonScen1_surf = pygame.transform.scale(StartButtonScen1_surf, (150, 70))
+StartButtonScen1_rect = StartButtonScen1_surf.get_rect(topleft=(1000, 570))
 
 while True:
     for event in pygame.event.get():
@@ -159,11 +188,14 @@ while True:
 
         if ScenarioOne_active:
             mouse_pos = pygame.mouse.get_pos()
-            #print(mouse_pos)
             if event.type == pygame.MOUSEBUTTONDOWN and BackButton_rect.collidepoint(mouse_pos):
                 ScenarioOne_active = False
                 pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
                 ScenarioSelect_active = True
+
+            if event.type == pygame.MOUSEBUTTONDOWN and StartButtonScen1_rect.collidepoint(mouse_pos):
+                DistanceFromGroundValue = 60
+                print(DistanceFromGroundValue)
 
         if ScenarioTwo_active:
             mouse_pos = pygame.mouse.get_pos()
