@@ -42,6 +42,14 @@ def display_Scenario1():
     screen.blit(MassDroppedMeasurementUnits_surf, MassDroppedMeasurementUnits_rect)
     screen.blit(StartButtonScen1_surf, StartButtonScen1_rect)
 
+
+def Time():
+    current_time = pygame.time.get_ticks()-start_time
+    score_surf = DistanceFromGround_font.render(f'{current_time}', False, (255, 255, 255))
+    score_rect = score_surf.get_rect(center=(400, 50))
+    screen.blit(score_surf, score_rect)
+
+
 def display_Scenario2():
     screen.blit(groundScenarioOne_surf, (0, 400))
     pygame.draw.rect(screen, '#000000', ((0, 520), (1200, 700)), 1000, 1)
@@ -216,15 +224,18 @@ while True:
         pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 110, 1)
         display_ScoreSelect()
 
-    else:
-        if ScenarioOne_active:
-            display_Scenario1()
+    if ScenarioOne_active:
+        pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
+        display_Scenario1()
+        Time()
 
-        if ScenarioTwo_active:
-            display_Scenario2()
+    if ScenarioTwo_active:
+        pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
+        display_Scenario2()
 
-        if ScenarioThree_active:
-            display_Scenario3()
-
+    if ScenarioThree_active:
+        pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
+        display_Scenario3()
+        
     pygame.display.update()
     clock.tick(60)
