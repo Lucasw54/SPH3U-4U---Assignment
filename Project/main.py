@@ -1,6 +1,5 @@
 import pygame
 from sys import exit
-from decimal import Decimal
 
 
 def display_ScoreSelect():
@@ -31,6 +30,7 @@ def display_Scenario1():
     pygame.draw.line(screen, '#ffffff', (682, 396), (762, 396), 4)
     pygame.draw.line(screen, '#ffffff', (682, 102), (762, 102), 4)
     screen.blit(StartButtonScen1_surf, StartButtonScen1_rect)
+    screen.blit(StopButtonScen1_surf, StopButtonScen1_rect)
     pygame.draw.circle(screen, '#ffffff', (600, DroppedMassHeight), 30)
 
 
@@ -175,7 +175,11 @@ DistanceFromGroundMeasurementUnits_rect = DistanceFromGroundMeasurementUnits_sur
 
 StartButtonScen1_surf = pygame.image.load('Graphics/Start.png').convert_alpha()
 StartButtonScen1_surf = pygame.transform.scale(StartButtonScen1_surf, (150, 70))
-StartButtonScen1_rect = StartButtonScen1_surf.get_rect(topleft=(1000, 570))
+StartButtonScen1_rect = StartButtonScen1_surf.get_rect(topleft=(800, 570))
+
+StopButtonScen1_surf = pygame.image.load('Graphics/Stop.png').convert_alpha()
+StopButtonScen1_surf = pygame.transform.scale(StopButtonScen1_surf, (180, 90))
+StopButtonScen1_rect = StopButtonScen1_surf.get_rect(topleft=(1000, 560))
 
 while True:
     for event in pygame.event.get():
@@ -210,6 +214,16 @@ while True:
             if event.type == pygame.MOUSEBUTTONDOWN and StartButtonScen1_rect.collidepoint(mouse_pos):
                 ScenarioOneAction = True
 
+            if event.type == pygame.MOUSEBUTTONDOWN and StopButtonScen1_rect.collidepoint(mouse_pos):
+                if DroppedMassHeight < 366:
+                    ScenarioOneAction = False
+                else:
+                    ScenarioOneAction = False
+                    DroppedMassHeight = 70
+                    DistanceTravelledDuringFrame = 0
+                    SpeedAtBeginningOfFrame = 0
+                    SpeedAtEndOfFrame = 0
+                    
             if event.type == pygame.MOUSEBUTTONDOWN and UpArrowDistance_rect.collidepoint(mouse_pos):
                 DistanceFromGroundValue += 1
 
@@ -249,15 +263,14 @@ while True:
             current_time = pygame.time.get_ticks() - start_time
 
             if DroppedMassHeight < 366:
-                DistanceTravelledDuringFrame = (SpeedAtBeginningOfFrame * 0.016) + (0.5 * 9.8 * (0.016 * 0.016))
-                SpeedAtEndOfFrame = ((2 * DistanceTravelledDuringFrame) / 0.016) - SpeedAtBeginningOfFrame
-                DistanceTravelledToPx = DistanceTravelledDuringFrame / 0.136
+                DistanceTravelledDuringFrame = (SpeedAtBeginningOfFrame * 0.05) + (0.5 * 9.81 * (0.05 * 0.05))
+                SpeedAtEndOfFrame = ((2 * DistanceTravelledDuringFrame) / 0.05) - SpeedAtBeginningOfFrame
+                DistanceTravelledToPx = DistanceTravelledDuringFrame / (DistanceFromGroundValue / 294)
                 DroppedMassHeight += DistanceTravelledToPx
 
                 SpeedAtBeginningOfFrame = SpeedAtEndOfFrame
-                print(SpeedAtEndOfFrame)
+                current_time = pygame.time.get_ticks() - start_time
                 print(current_time)
-
         else:
             pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
             display_Scenario1()
@@ -273,4 +286,4 @@ while True:
         display_Scenario3()
 
     pygame.display.update()
-    clock.tick(60)
+    clock.tick(20)
