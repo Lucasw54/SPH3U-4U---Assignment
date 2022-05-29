@@ -108,6 +108,7 @@ DistanceTravelledDuringFrame = 0
 SpeedAtBeginningOfFrame = 0
 SpeedAtEndOfFrame = 0
 CurrentDistanceFromGround = 40
+TimeAtBeginningOfFrame = 0
 
 # Intro Screen
 title_surf = title_font.render("Simulated Physics Environment", False, (255, 255, 255))
@@ -229,12 +230,15 @@ while True:
                     SpeedAtBeginningOfFrame = 0
                     SpeedAtEndOfFrame = 0
                     CurrentDistanceFromGround = 40
+                    TimeAtBeginningOfFrame = 0
 
             if event.type == pygame.MOUSEBUTTONDOWN and UpArrowDistance_rect.collidepoint(mouse_pos):
                 DistanceFromGroundValue += 1
+                CurrentDistanceFromGround += 1
 
             if event.type == pygame.MOUSEBUTTONDOWN and DownArrowDistance_rect.collidepoint(mouse_pos):
                 DistanceFromGroundValue -= 1
+                CurrentDistanceFromGround -= 1
 
             if event.type == pygame.MOUSEBUTTONDOWN and UpArrowMass_rect.collidepoint(mouse_pos):
                 MassDroppedValue += 1
@@ -274,9 +278,14 @@ while True:
                 DistanceTravelledToPx = DistanceTravelledDuringFrame / (DistanceFromGroundValue / 294)
                 DroppedMassHeight += DistanceTravelledToPx
 
-                SpeedAtBeginningOfFrame = SpeedAtEndOfFrame
                 current_time = pygame.time.get_ticks() - start_time
+                DifferenceInTime = current_time - TimeAtBeginningOfFrame
+                FinalTime = current_time - DifferenceInTime
+
+                SpeedAtBeginningOfFrame = SpeedAtEndOfFrame
+                TimeAtBeginningOfFrame = current_time
                 CurrentDistanceFromGround -= DistanceTravelledDuringFrame
+                print(FinalTime)
 
         else:
             pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
