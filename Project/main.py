@@ -32,6 +32,21 @@ def display_Scenario1():
     screen.blit(StartButtonScen1_surf, StartButtonScen1_rect)
     screen.blit(StopButtonScen1_surf, StopButtonScen1_rect)
     pygame.draw.circle(screen, '#ffffff', (600, DroppedMassHeight), 30)
+    screen.blit(InitialVelocity_surf, InitialVelocity_rect)
+    screen.blit(Gravity_surf, Gravity_rect)
+
+    pygame.draw.circle(screen, '#000000', (1000, 50), 5)
+    pygame.draw.line(screen, '#000000', (1000, 50), (1000, 20), 3)
+    pygame.draw.line(screen, '#000000', (1000, 20), (995, 30), 3)
+    pygame.draw.line(screen, '#000000', (1000, 20), (1005, 30), 3)
+
+    pygame.draw.line(screen, '#000000', (1000, 50), (1000, 80), 3)
+    pygame.draw.line(screen, '#000000', (1000, 80), (995, 70), 3)
+    pygame.draw.line(screen, '#000000', (1000, 80), (1005, 70), 3)
+
+    pygame.draw.line(screen, '#000000', (560, 20), (560, 40), 3)
+    pygame.draw.line(screen, '#000000', (560, 40), (565, 35), 3)
+    pygame.draw.line(screen, '#000000', (560, 40), (555, 35), 3)
 
 
 def Scenario1ValuesUpdate():
@@ -39,6 +54,11 @@ def Scenario1ValuesUpdate():
     screen.blit(DownArrowDistance_surf, DownArrowDistance_rect)
     screen.blit(UpArrowMass_surf, UpArrowMass_rect)
     screen.blit(DownArrowMass_surf, DownArrowMass_rect)
+    screen.blit(UpArrowInitialVelocity_surf, UpArrowInitialVelocity_rect)
+    screen.blit(DownArrowInitialVelocity_surf, DownArrowInitialVelocity_rect)
+    screen.blit(UpArrowGravity_surf, UpArrowGravity_rect)
+    screen.blit(DownArrowGravity_surf, DownArrowGravity_rect)
+
     screen.blit(DistanceFromGroundMeasurementUnits_surf, DistanceFromGroundMeasurementUnits_rect)
     screen.blit(MassDroppedMeasurementUnits_surf, MassDroppedMeasurementUnits_rect)
 
@@ -58,6 +78,21 @@ def Scenario1ValuesUpdate():
     MassDroppedMeasurement_rect = MassDroppedMeasurement_surf.get_rect(topleft=(575, 55))
     screen.blit(MassDroppedMeasurement_surf, MassDroppedMeasurement_rect)
 
+    InitialVelocityNum_surf = Value_font.render(f'{InitialVelocityValue}', False, (255, 255, 255))
+    InitialVelocityNum_rect = InitialVelocityNum_surf.get_rect(topleft=(200, 593))
+    screen.blit(InitialVelocityNum_surf, InitialVelocityNum_rect)
+
+    InitialVelocityMeasurement_surf = Value_font.render(f'{InitialVelocityValue}', False, (0, 0, 0))
+    InitialVelocityMeasurement_rect = InitialVelocityMeasurement_surf.get_rect(topleft=(575, 15))
+    screen.blit(InitialVelocityMeasurement_surf, InitialVelocityMeasurement_rect)
+
+    screen.blit(InitialVelocityMeasurementUnits_surf, InitialVelocityMeasurementUnits_rect)
+    screen.blit(GravityMeasurementUnits_surf, GravityMeasurementUnits_rect)
+
+    GravityNum_surf = Value_font.render(f'{GravityValue}', False, (255, 255, 255))
+    GravityNum_rect = GravityNum_surf.get_rect(topleft=(195, 643))
+    screen.blit(GravityNum_surf, GravityNum_rect)
+
 
 def Scenario1Action():
     pygame.draw.circle(screen, '#ffffff', (600, DroppedMassHeight), 30)
@@ -65,6 +100,17 @@ def Scenario1Action():
     CurrentDistanceTravelledValue_surf = DistanceFromGround_font.render(f'{CurrentDistanceFromGround}', False, (255, 255, 255))
     CurrentDistanceTravelledValue_rect = CurrentDistanceTravelledValue_surf.get_rect(topleft=(600, 580))
     screen.blit(CurrentDistanceTravelledValue_surf, CurrentDistanceTravelledValue_rect)
+
+    InitialVelocityMeasurement_surf = Value_font.render(f'{InitialVelocityValue}', False, (0, 0, 0))
+    InitialVelocityMeasurement_rect = InitialVelocityMeasurement_surf.get_rect(topleft=(575, 15))
+    screen.blit(InitialVelocityMeasurement_surf, InitialVelocityMeasurement_rect)
+
+    screen.blit(InitialVelocityMeasurementUnits_surf, InitialVelocityMeasurementUnits_rect)
+
+    screen.blit(DistanceFromGroundMeasurementUnits_surf, DistanceFromGroundMeasurementUnits_rect)
+    DistanceFromGroundMeasurement_surf = Value_font.render(f'{DistanceFromGroundValue}', False, (0, 0, 0))
+    DistanceFromGroundMeasurement_rect = DistanceFromGroundMeasurement_surf.get_rect(topleft=(740, 250))
+    screen.blit(DistanceFromGroundMeasurement_surf, DistanceFromGroundMeasurement_rect)
 
 
 def display_Scenario2():
@@ -109,6 +155,8 @@ SpeedAtBeginningOfFrame = 0
 SpeedAtEndOfFrame = 0
 CurrentDistanceFromGround = 40
 TimeAtBeginningOfFrame = 0
+InitialVelocityValue = 0
+GravityValue = 9.8
 
 # Intro Screen
 title_surf = title_font.render("Simulated Physics Environment", False, (255, 255, 255))
@@ -151,7 +199,7 @@ BackButton_rect = BackButton_surf.get_rect(topleft=(0, 0))
 PhysicsInfo_surf = PhysicsInfo_font.render("Physics Information", False, (255, 255, 255))
 PhysicsInfo_rect = PhysicsInfo_surf.get_rect(topleft=(30, 535))
 
-DistanceFromGround_surf = DistanceFromGround_font.render("Distance from ground", False, (255, 255, 255))
+DistanceFromGround_surf = DistanceFromGround_font.render("Distance (m)", False, (255, 255, 255))
 DistanceFromGround_rect = DistanceFromGround_surf.get_rect(topleft=(50, 593))
 
 UpArrowDistance_surf = pygame.image.load('Graphics/UpAndDownArrows/UpArrow.png').convert_alpha()
@@ -162,7 +210,7 @@ DownArrowDistance_surf = pygame.image.load('Graphics/UpAndDownArrows/DownArrow.p
 DownArrowDistance_surf = pygame.transform.scale(DownArrowDistance_surf, (80, 30))
 DownArrowDistance_rect = DownArrowDistance_surf.get_rect(topleft=(-18, 605))
 
-MassDropped_surf = DistanceFromGround_font.render("Mass of Object", False, (255, 255, 255))
+MassDropped_surf = DistanceFromGround_font.render("Mass (Kg)", False, (255, 255, 255))
 MassDropped_rect = MassDropped_surf.get_rect(topleft=(50, 643))
 
 MassDroppedMeasurementUnits_surf = Value_font.render("Kg", False, (0, 0, 0))
@@ -186,6 +234,34 @@ StartButtonScen1_rect = StartButtonScen1_surf.get_rect(topleft=(800, 570))
 StopButtonScen1_surf = pygame.image.load('Graphics/Stop.png').convert_alpha()
 StopButtonScen1_surf = pygame.transform.scale(StopButtonScen1_surf, (180, 90))
 StopButtonScen1_rect = StopButtonScen1_surf.get_rect(topleft=(1000, 560))
+
+InitialVelocity_surf = DistanceFromGround_font.render("Initial Velocity (m/s)", False, (255, 255, 255))
+InitialVelocity_rect = InitialVelocity_surf.get_rect(topleft=(230, 593))
+
+InitialVelocityMeasurementUnits_surf = Value_font.render("m/s", False, (0, 0, 0))
+InitialVelocityMeasurementUnits_rect = MassDroppedMeasurementUnits_surf.get_rect(topleft=(605, 15))
+
+UpArrowInitialVelocity_surf = pygame.image.load('Graphics/UpAndDownArrows/UpArrow.png').convert_alpha()
+UpArrowInitialVelocity_surf = pygame.transform.scale(UpArrowInitialVelocity_surf, (80, 30))
+UpArrowInitialVelocity_rect = UpArrowInitialVelocity_surf.get_rect(topleft=(180, 575))
+
+DownArrowInitialVelocity_surf = pygame.image.load('Graphics/UpAndDownArrows/DownArrow.png').convert_alpha()
+DownArrowInitialVelocity_surf = pygame.transform.scale(DownArrowInitialVelocity_surf, (80, 30))
+DownArrowInitialVelocity_rect = DownArrowInitialVelocity_surf.get_rect(topleft=(162, 605))
+
+Gravity_surf = DistanceFromGround_font.render("Gravity (m/s^2)", False, (255, 255, 255))
+Gravity_rect = Gravity_surf.get_rect(topleft=(230, 643))
+
+GravityMeasurementUnits_surf = Value_font.render("m/s^2", False, (0, 0, 0))
+GravityMeasurementUnits_rect = GravityMeasurementUnits_surf.get_rect(topleft=(1005, 55))
+
+UpArrowGravity_surf = pygame.image.load('Graphics/UpAndDownArrows/UpArrow.png').convert_alpha()
+UpArrowGravity_surf = pygame.transform.scale(UpArrowGravity_surf, (80, 30))
+UpArrowGravity_rect = UpArrowGravity_surf.get_rect(topleft=(180, 625))
+
+DownArrowGravity_surf = pygame.image.load('Graphics/UpAndDownArrows/DownArrow.png').convert_alpha()
+DownArrowGravity_surf = pygame.transform.scale(DownArrowGravity_surf, (80, 30))
+DownArrowGravity_rect = DownArrowInitialVelocity_surf.get_rect(topleft=(162, 655))
 
 while True:
     for event in pygame.event.get():
@@ -229,7 +305,7 @@ while True:
                     DistanceTravelledDuringFrame = 0
                     SpeedAtBeginningOfFrame = 0
                     SpeedAtEndOfFrame = 0
-                    CurrentDistanceFromGround = 40
+                    CurrentDistanceFromGround = DistanceFromGroundValue
                     TimeAtBeginningOfFrame = 0
 
             if event.type == pygame.MOUSEBUTTONDOWN and UpArrowDistance_rect.collidepoint(mouse_pos):
