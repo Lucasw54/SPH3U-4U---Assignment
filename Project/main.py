@@ -78,11 +78,11 @@ def Scenario1ValuesUpdate():
     MassDroppedMeasurement_rect = MassDroppedMeasurement_surf.get_rect(topleft=(575, 55))
     screen.blit(MassDroppedMeasurement_surf, MassDroppedMeasurement_rect)
 
-    InitialVelocityNum_surf = Value_font.render(f'{InitialVelocityValue}', False, (255, 255, 255))
+    InitialVelocityNum_surf = Value_font.render(f'{SpeedAtBeginningOfFrame}', False, (255, 255, 255))
     InitialVelocityNum_rect = InitialVelocityNum_surf.get_rect(topleft=(200, 593))
     screen.blit(InitialVelocityNum_surf, InitialVelocityNum_rect)
 
-    InitialVelocityMeasurement_surf = Value_font.render(f'{InitialVelocityValue}', False, (0, 0, 0))
+    InitialVelocityMeasurement_surf = Value_font.render(f'{SpeedAtBeginningOfFrame}', False, (0, 0, 0))
     InitialVelocityMeasurement_rect = InitialVelocityMeasurement_surf.get_rect(topleft=(575, 15))
     screen.blit(InitialVelocityMeasurement_surf, InitialVelocityMeasurement_rect)
 
@@ -101,7 +101,7 @@ def Scenario1Action():
     CurrentDistanceTravelledValue_rect = CurrentDistanceTravelledValue_surf.get_rect(topleft=(600, 580))
     screen.blit(CurrentDistanceTravelledValue_surf, CurrentDistanceTravelledValue_rect)
 
-    InitialVelocityMeasurement_surf = Value_font.render(f'{InitialVelocityValue}', False, (0, 0, 0))
+    InitialVelocityMeasurement_surf = Value_font.render(f'{SpeedAtBeginningOfFrame}', False, (0, 0, 0))
     InitialVelocityMeasurement_rect = InitialVelocityMeasurement_surf.get_rect(topleft=(575, 15))
     screen.blit(InitialVelocityMeasurement_surf, InitialVelocityMeasurement_rect)
 
@@ -155,7 +155,6 @@ SpeedAtBeginningOfFrame = 0
 SpeedAtEndOfFrame = 0
 CurrentDistanceFromGround = 40
 TimeAtBeginningOfFrame = 0
-InitialVelocityValue = 0
 GravityValue = 9.8
 
 # Intro Screen
@@ -322,6 +321,18 @@ while True:
             if event.type == pygame.MOUSEBUTTONDOWN and DownArrowMass_rect.collidepoint(mouse_pos):
                 MassDroppedValue -= 1
 
+            if event.type == pygame.MOUSEBUTTONDOWN and UpArrowInitialVelocity_rect.collidepoint(mouse_pos):
+                SpeedAtBeginningOfFrame += 1
+
+            if event.type == pygame.MOUSEBUTTONDOWN and DownArrowInitialVelocity_rect.collidepoint(mouse_pos):
+                SpeedAtBeginningOfFrame -= 1
+
+            if event.type == pygame.MOUSEBUTTONDOWN and UpArrowGravity_rect.collidepoint(mouse_pos):
+                GravityValue += 0.1
+
+            if event.type == pygame.MOUSEBUTTONDOWN and DownArrowGravity_rect.collidepoint(mouse_pos):
+                GravityValue -= 0.1
+
         if ScenarioTwo_active:
             mouse_pos = pygame.mouse.get_pos()
             if event.type == pygame.MOUSEBUTTONDOWN and BackButton_rect.collidepoint(mouse_pos):
@@ -349,7 +360,7 @@ while True:
             current_time = pygame.time.get_ticks() - start_time
 
             if DroppedMassHeight < 366 and CurrentDistanceFromGround > DistanceTravelledDuringFrame:
-                DistanceTravelledDuringFrame = (SpeedAtBeginningOfFrame * 0.05) + (0.5 * 9.81 * (0.05 * 0.05))
+                DistanceTravelledDuringFrame = (SpeedAtBeginningOfFrame * 0.05) + (0.5 * GravityValue * (0.05 * 0.05))
                 SpeedAtEndOfFrame = ((2 * DistanceTravelledDuringFrame) / 0.05) - SpeedAtBeginningOfFrame
                 DistanceTravelledToPx = DistanceTravelledDuringFrame / (DistanceFromGroundValue / 294)
                 DroppedMassHeight += DistanceTravelledToPx
