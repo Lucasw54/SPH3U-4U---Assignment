@@ -1,5 +1,6 @@
 import pygame
 from sys import exit
+import math
 
 
 def display_ScoreSelect():
@@ -11,7 +12,7 @@ def display_ScoreSelect():
     screen.blit(ScenarioOneText_surf, ScenarioOneText_rect)
 
     screen.blit(ScenarioTwoSelect_surf, ScenarioTwoSelect_rect)
-    
+
     screen.blit(ScenarioThreeSelect_surf, ScenarioThreeSelect_rect)
 
 
@@ -89,28 +90,54 @@ def Scenario1ValuesUpdate():
     screen.blit(InitialVelocityMeasurementUnits_surf, InitialVelocityMeasurementUnits_rect)
     screen.blit(GravityMeasurementUnits_surf, GravityMeasurementUnits_rect)
 
-    GravityNum_surf = Value_font.render(f'{GravityValue}', False, (255, 255, 255))
+    GravityNum_surf = Value_font.render(f'{round(GravityValue, 2)}', False, (255, 255, 255))
     GravityNum_rect = GravityNum_surf.get_rect(topleft=(195, 643))
     screen.blit(GravityNum_surf, GravityNum_rect)
+
+    ElapsedTimeStat_surf = DistanceFromGround_font.render("Time Elapsed: " + f'{round(EndingTime, 1)}' + " s", False, (255, 255, 255))
+    ElapsedTimeStat_rect = ElapsedTimeStat_surf.get_rect(topleft=(470, 540))
+    screen.blit(ElapsedTimeStat_surf, ElapsedTimeStat_rect)
+
+    DistanceStat_surf = DistanceFromGround_font.render("Distance Travelled: " + f'{round(DistanceTravelledOverall, 1)}' + " m", False, (255, 255, 255))
+    DistanceStat_rect = DistanceStat_surf.get_rect(topleft=(470, 570))
+    screen.blit(DistanceStat_surf, DistanceStat_rect)
+
+    InitialVelocityStat_surf = DistanceFromGround_font.render("Initial Velocity: " + f'{round(InitialVelocityStat, 1)}' + " m/s", False, (255, 255, 255))
+    InitialVelocityStat_rect = InitialVelocityStat_surf.get_rect(topleft=(470, 600))
+    screen.blit(InitialVelocityStat_surf, InitialVelocityStat_rect)
+
+    AccelerationStat_surf = DistanceFromGround_font.render("Acceleration: " + f'{round(GravityValue, 1)}' + " m/s^2", False, (255, 255, 255))
+    AccelerationStat_rect = AccelerationStat_surf.get_rect(topleft=(470, 630))
+    screen.blit(AccelerationStat_surf, AccelerationStat_rect)
 
 
 def Scenario1Action():
     pygame.draw.circle(screen, '#ffffff', (600, DroppedMassHeight), 30)
 
-    CurrentDistanceTravelledValue_surf = DistanceFromGround_font.render(f'{CurrentDistanceFromGround}', False, (255, 255, 255))
-    CurrentDistanceTravelledValue_rect = CurrentDistanceTravelledValue_surf.get_rect(topleft=(600, 580))
-    screen.blit(CurrentDistanceTravelledValue_surf, CurrentDistanceTravelledValue_rect)
-
-    InitialVelocityMeasurement_surf = Value_font.render(f'{SpeedAtBeginningOfFrame}', False, (0, 0, 0))
+    InitialVelocityMeasurement_surf = Value_font.render(f'{round(SpeedAtBeginningOfFrame, 2)}' + " m/s", False, (0, 0, 0))
     InitialVelocityMeasurement_rect = InitialVelocityMeasurement_surf.get_rect(topleft=(575, 15))
     screen.blit(InitialVelocityMeasurement_surf, InitialVelocityMeasurement_rect)
-
-    screen.blit(InitialVelocityMeasurementUnits_surf, InitialVelocityMeasurementUnits_rect)
 
     screen.blit(DistanceFromGroundMeasurementUnits_surf, DistanceFromGroundMeasurementUnits_rect)
     DistanceFromGroundMeasurement_surf = Value_font.render(f'{DistanceFromGroundValue}', False, (0, 0, 0))
     DistanceFromGroundMeasurement_rect = DistanceFromGroundMeasurement_surf.get_rect(topleft=(740, 250))
     screen.blit(DistanceFromGroundMeasurement_surf, DistanceFromGroundMeasurement_rect)
+
+    ElapsedTimeStat_surf = DistanceFromGround_font.render("Time Elapsed: " + f'{round(EndingTime, 1)}' + " s", False,(255, 255, 255))
+    ElapsedTimeStat_rect = ElapsedTimeStat_surf.get_rect(topleft=(470, 540))
+    screen.blit(ElapsedTimeStat_surf, ElapsedTimeStat_rect)
+
+    DistanceStat_surf = DistanceFromGround_font.render("Distance Travelled: " + f'{round(DistanceTravelledOverall, 1)}' + " m", False, (255, 255, 255))
+    DistanceStat_rect = DistanceStat_surf.get_rect(topleft=(470, 570))
+    screen.blit(DistanceStat_surf, DistanceStat_rect)
+
+    InitialVelocityStat_surf = DistanceFromGround_font.render("Initial Velocity: " + f'{round(InitialVelocityStat, 1)}' + " m/s", False, (255, 255, 255))
+    InitialVelocityStat_rect = InitialVelocityStat_surf.get_rect(topleft=(470, 600))
+    screen.blit(InitialVelocityStat_surf, InitialVelocityStat_rect)
+
+    AccelerationStat_surf = DistanceFromGround_font.render("Acceleration: " + f'{round(GravityValue, 1)}' + " m/s^2", False, (255, 255, 255))
+    AccelerationStat_rect = AccelerationStat_surf.get_rect(topleft=(470, 630))
+    screen.blit(AccelerationStat_surf, AccelerationStat_rect)
 
 
 def display_Scenario2():
@@ -147,15 +174,24 @@ ScenarioTwo_active = False
 ScenarioThree_active = False
 ScenarioSelect_active = True
 start_time = 0
+InitialDistanceFromGroundValue = 40
 DistanceFromGroundValue = 40
 MassDroppedValue = 10
 DroppedMassHeight = 70
+HeightOfFloor = 366
 DistanceTravelledDuringFrame = 0
 SpeedAtBeginningOfFrame = 0
 SpeedAtEndOfFrame = 0
 CurrentDistanceFromGround = 40
 TimeAtBeginningOfFrame = 0
 GravityValue = 9.8
+ExtraDistance = 0
+ExtraTime = 0
+ExtraVelocity = 0
+FinalTime = 0
+EndingTime = 0
+DistanceTravelledOverall = 0
+InitialVelocityStat = 0
 
 # Intro Screen
 title_surf = title_font.render("Simulated Physics Environment", False, (255, 255, 255))
@@ -306,14 +342,18 @@ while True:
                     SpeedAtEndOfFrame = 0
                     CurrentDistanceFromGround = DistanceFromGroundValue
                     TimeAtBeginningOfFrame = 0
+                    DistanceTravelledOverall = 0
+                    InitialVelocityStat = 0
 
             if event.type == pygame.MOUSEBUTTONDOWN and UpArrowDistance_rect.collidepoint(mouse_pos):
                 DistanceFromGroundValue += 1
                 CurrentDistanceFromGround += 1
+                InitialDistanceFromGroundValue += 1
 
             if event.type == pygame.MOUSEBUTTONDOWN and DownArrowDistance_rect.collidepoint(mouse_pos):
                 DistanceFromGroundValue -= 1
                 CurrentDistanceFromGround -= 1
+                InitialDistanceFromGroundValue -= 1
 
             if event.type == pygame.MOUSEBUTTONDOWN and UpArrowMass_rect.collidepoint(mouse_pos):
                 MassDroppedValue += 1
@@ -323,9 +363,11 @@ while True:
 
             if event.type == pygame.MOUSEBUTTONDOWN and UpArrowInitialVelocity_rect.collidepoint(mouse_pos):
                 SpeedAtBeginningOfFrame += 1
+                InitialVelocityStat += 1
 
             if event.type == pygame.MOUSEBUTTONDOWN and DownArrowInitialVelocity_rect.collidepoint(mouse_pos):
                 SpeedAtBeginningOfFrame -= 1
+                InitialVelocityStat -= 1
 
             if event.type == pygame.MOUSEBUTTONDOWN and UpArrowGravity_rect.collidepoint(mouse_pos):
                 GravityValue += 0.1
@@ -372,7 +414,19 @@ while True:
                 SpeedAtBeginningOfFrame = SpeedAtEndOfFrame
                 TimeAtBeginningOfFrame = current_time
                 CurrentDistanceFromGround -= DistanceTravelledDuringFrame
-                print(FinalTime)
+                EndingTime = FinalTime / 1000
+                DistanceTravelledOverall = InitialDistanceFromGroundValue - CurrentDistanceFromGround
+                print(DistanceTravelledOverall)
+
+            else:
+                ExtraDistance = HeightOfFloor - DroppedMassHeight
+                ExtraTime = 0.05 * ExtraDistance
+                CurrentDistanceFromGround -= CurrentDistanceFromGround
+                DroppedMassHeight += ExtraDistance
+                FinalTime += ExtraTime*100
+                EndingTime = FinalTime/1000
+                DistanceTravelledOverall = InitialDistanceFromGroundValue - CurrentDistanceFromGround
+                print(EndingTime)
 
         else:
             pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
