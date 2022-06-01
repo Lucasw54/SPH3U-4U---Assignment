@@ -366,7 +366,7 @@ while True:
                 CurrentDistanceFromGround += 1
                 InitialDistanceFromGroundValue += 1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and DownArrowDistance_rect.collidepoint(mouse_pos):
+            if event.type == pygame.MOUSEBUTTONDOWN and DownArrowDistance_rect.collidepoint(mouse_pos) and DistanceFromGroundValue > 1:
                 DistanceFromGroundValue -= 1
                 CurrentDistanceFromGround -= 1
                 InitialDistanceFromGroundValue -= 1
@@ -374,7 +374,7 @@ while True:
             if event.type == pygame.MOUSEBUTTONDOWN and UpArrowMass_rect.collidepoint(mouse_pos):
                 MassDroppedValue += 1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and DownArrowMass_rect.collidepoint(mouse_pos):
+            if event.type == pygame.MOUSEBUTTONDOWN and DownArrowMass_rect.collidepoint(mouse_pos) and MassDroppedValue > 1:
                 MassDroppedValue -= 1
 
             if event.type == pygame.MOUSEBUTTONDOWN and UpArrowInitialVelocity_rect.collidepoint(mouse_pos):
@@ -388,7 +388,7 @@ while True:
             if event.type == pygame.MOUSEBUTTONDOWN and UpArrowGravity_rect.collidepoint(mouse_pos):
                 GravityValue += 0.1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and DownArrowGravity_rect.collidepoint(mouse_pos):
+            if event.type == pygame.MOUSEBUTTONDOWN and DownArrowGravity_rect.collidepoint(mouse_pos) and GravityValue > 0.2:
                 GravityValue -= 0.1
 
         if ScenarioTwo_active:
