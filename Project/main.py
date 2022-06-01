@@ -88,7 +88,6 @@ def Scenario1ValuesUpdate():
     screen.blit(InitialVelocityMeasurement_surf, InitialVelocityMeasurement_rect)
 
     screen.blit(InitialVelocityMeasurementUnits_surf, InitialVelocityMeasurementUnits_rect)
-    screen.blit(GravityMeasurementUnits_surf, GravityMeasurementUnits_rect)
 
     GravityNum_surf = Value_font.render(f'{round(GravityValue, 2)}', False, (255, 255, 255))
     GravityNum_rect = GravityNum_surf.get_rect(topleft=(195, 643))
@@ -106,9 +105,21 @@ def Scenario1ValuesUpdate():
     InitialVelocityStat_rect = InitialVelocityStat_surf.get_rect(topleft=(470, 600))
     screen.blit(InitialVelocityStat_surf, InitialVelocityStat_rect)
 
+    FinalVelocityStat_surf = DistanceFromGround_font.render("Final Velocity: " + f'{round(ExtraVelocity, 1)}' + " m/s",False, (255, 255, 255))
+    FinalVelocityStat_rect = FinalVelocityStat_surf.get_rect(topleft=(470, 630))
+    screen.blit(FinalVelocityStat_surf, FinalVelocityStat_rect)
+
     AccelerationStat_surf = DistanceFromGround_font.render("Acceleration: " + f'{round(GravityValue, 1)}' + " m/s^2", False, (255, 255, 255))
-    AccelerationStat_rect = AccelerationStat_surf.get_rect(topleft=(470, 630))
+    AccelerationStat_rect = AccelerationStat_surf.get_rect(topleft=(470, 660))
     screen.blit(AccelerationStat_surf, AccelerationStat_rect)
+
+    GravityMeasurementUnits_surf = Value_font.render("Fg = " + f'{round((GravityValue * MassDroppedValue), 1)}' + "N", False, (0, 0, 0))
+    GravityMeasurementUnits_rect = GravityMeasurementUnits_surf.get_rect(topleft=(1025, 55))
+    screen.blit(GravityMeasurementUnits_surf, GravityMeasurementUnits_rect)
+
+    NormalForce_surf = Value_font.render("Fn = " + f'{round((GravityValue * MassDroppedValue), 1)}' + "N", False, (0, 0, 0))
+    NormalForce_rect = NormalForce_surf.get_rect(topleft=(1025, 15))
+    screen.blit(NormalForce_surf, NormalForce_rect)
 
 
 def Scenario1Action():
@@ -135,9 +146,17 @@ def Scenario1Action():
     InitialVelocityStat_rect = InitialVelocityStat_surf.get_rect(topleft=(470, 600))
     screen.blit(InitialVelocityStat_surf, InitialVelocityStat_rect)
 
+    FinalVelocityStat_surf = DistanceFromGround_font.render("Final Velocity: " + f'{round(ExtraVelocity, 1)}' + " m/s", False, (255, 255, 255))
+    FinalVelocityStat_rect = FinalVelocityStat_surf.get_rect(topleft=(470, 630))
+    screen.blit(FinalVelocityStat_surf, FinalVelocityStat_rect)
+
     AccelerationStat_surf = DistanceFromGround_font.render("Acceleration: " + f'{round(GravityValue, 1)}' + " m/s^2", False, (255, 255, 255))
-    AccelerationStat_rect = AccelerationStat_surf.get_rect(topleft=(470, 630))
+    AccelerationStat_rect = AccelerationStat_surf.get_rect(topleft=(470, 660))
     screen.blit(AccelerationStat_surf, AccelerationStat_rect)
+
+    GravityMeasurementUnits_surf = Value_font.render("Fg = " + f'{round((GravityValue * MassDroppedValue), 1)}' + "N", False, (0, 0, 0))
+    GravityMeasurementUnits_rect = GravityMeasurementUnits_surf.get_rect(topleft=(1025, 55))
+    screen.blit(GravityMeasurementUnits_surf, GravityMeasurementUnits_rect)
 
 
 def display_Scenario2():
@@ -287,9 +306,6 @@ DownArrowInitialVelocity_rect = DownArrowInitialVelocity_surf.get_rect(topleft=(
 Gravity_surf = DistanceFromGround_font.render("Gravity (m/s^2)", False, (255, 255, 255))
 Gravity_rect = Gravity_surf.get_rect(topleft=(230, 643))
 
-GravityMeasurementUnits_surf = Value_font.render("m/s^2", False, (0, 0, 0))
-GravityMeasurementUnits_rect = GravityMeasurementUnits_surf.get_rect(topleft=(1005, 55))
-
 UpArrowGravity_surf = pygame.image.load('Graphics/UpAndDownArrows/UpArrow.png').convert_alpha()
 UpArrowGravity_surf = pygame.transform.scale(UpArrowGravity_surf, (80, 30))
 UpArrowGravity_rect = UpArrowGravity_surf.get_rect(topleft=(180, 625))
@@ -416,7 +432,6 @@ while True:
                 CurrentDistanceFromGround -= DistanceTravelledDuringFrame
                 EndingTime = FinalTime / 1000
                 DistanceTravelledOverall = InitialDistanceFromGroundValue - CurrentDistanceFromGround
-                print(DistanceTravelledOverall)
 
             else:
                 ExtraDistance = HeightOfFloor - DroppedMassHeight
@@ -426,7 +441,7 @@ while True:
                 FinalTime += ExtraTime*100
                 EndingTime = FinalTime/1000
                 DistanceTravelledOverall = InitialDistanceFromGroundValue - CurrentDistanceFromGround
-                print(EndingTime)
+                ExtraVelocity = SpeedAtBeginningOfFrame + (GravityValue*ExtraTime)
 
         else:
             pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
