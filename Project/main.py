@@ -37,9 +37,6 @@ def display_Scenario1():
     screen.blit(Scen1_Gravity_surf, Scen1_Gravity_rect)
 
     pygame.draw.circle(screen, '#000000', (1000, 50), 5)
-    pygame.draw.line(screen, '#000000', (1000, 50), (1000, 20), 3)
-    pygame.draw.line(screen, '#000000', (1000, 20), (995, 30), 3)
-    pygame.draw.line(screen, '#000000', (1000, 20), (1005, 30), 3)
 
     pygame.draw.line(screen, '#000000', (1000, 50), (1000, 80), 3)
     pygame.draw.line(screen, '#000000', (1000, 80), (995, 70), 3)
@@ -120,6 +117,10 @@ def Scenario1ValuesUpdate():
     Scen1_NormalForce_surf = Value_font.render("Fn = " + f'{round((Scen1_GravityValue * Scen1_MassDroppedValue), 1)}' + " N", False, (0, 0, 0))
     Scen1_NormalForce_rect = Scen1_NormalForce_surf.get_rect(topleft=(1025, 15))
     screen.blit(Scen1_NormalForce_surf, Scen1_NormalForce_rect)
+
+    pygame.draw.line(screen, '#000000', (1000, 50), (1000, 20), 3)
+    pygame.draw.line(screen, '#000000', (1000, 20), (995, 30), 3)
+    pygame.draw.line(screen, '#000000', (1000, 20), (1005, 30), 3)
 
 
 def Scenario1Action():
