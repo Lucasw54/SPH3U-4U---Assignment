@@ -10,6 +10,7 @@ def display_ScoreSelect():
 
     screen.blit(ScenarioOneSelect_surf, ScenarioOneSelect_rect)
     screen.blit(ScenarioOneText_surf, ScenarioOneText_rect)
+    screen.blit(ScenarioTwoText_surf, ScenarioTwoText_rect)
 
     screen.blit(ScenarioTwoSelect_surf, ScenarioTwoSelect_rect)
 
@@ -161,11 +162,150 @@ def Scenario1Action():
 
 
 def display_Scenario2():
-    screen.blit(Scen1_ground_surf, (0, 400))
+    screen.blit(Scen1_ground_surf, Scen1_ground_rect)
+    screen.blit(Scen2_Cliff_surf, Scen2_Cliff_rect)
     pygame.draw.rect(screen, '#000000', ((0, 520), (1200, 700)), 1000, 1)
     pygame.draw.rect(screen, '#ffffff', ((0, 520), (1200, 540)), 10, 1)
     pygame.draw.line(screen, '#ffffff', (0, 695), (1200, 695), 10)
     screen.blit(Scen1_BackButton_surf, Scen1_BackButton_rect)
+    screen.blit(Scen1_PhysicsInfo_surf, Scen1_PhysicsInfo_rect)
+    pygame.draw.line(screen, '#ffffff', (25, 570), (290, 570), 4)
+    screen.blit(Scen2_DistanceFromGround_surf, Scen2_DistanceFromGround_rect)
+    screen.blit(Scen2_MassDropped_surf, Scen2_MassDropped_rect)
+
+    #  Distance measurement lines
+    pygame.draw.line(screen, '#ffffff', (722, 102), (722, 396), 4)
+    pygame.draw.line(screen, '#ffffff', (682, 396), (762, 396), 4)
+    pygame.draw.line(screen, '#ffffff', (682, 102), (762, 102), 4)
+
+    screen.blit(Scen2_StartButton_surf, Scen2_StartButton_rect)
+    screen.blit(Scen2_StopButton_surf, Scen2_StopButton_rect)
+    pygame.draw.circle(screen, '#ffffff', (600, Scen2_MassHeight), 30)
+    screen.blit(Scen2_InitialVelocity_surf, Scen2_InitialVelocity_rect)
+    screen.blit(Scen2_Gravity_surf, Scen2_Gravity_rect)
+
+    #pygame.draw.circle(screen, '#000000', (1000, 50), 5)
+
+    #pygame.draw.line(screen, '#000000', (1000, 50), (1000, 80), 3)
+    #pygame.draw.line(screen, '#000000', (1000, 80), (995, 70), 3)
+    #pygame.draw.line(screen, '#000000', (1000, 80), (1005, 70), 3)
+
+    #pygame.draw.line(screen, '#000000', (560, 20), (560, 40), 3)
+    #pygame.draw.line(screen, '#000000', (560, 40), (565, 35), 3)
+    #pygame.draw.line(screen, '#000000', (560, 40), (555, 35), 3)
+
+
+def Scenario2ValuesUpdate():
+    screen.blit(Scen2_UpArrowDistance_surf, Scen2_UpArrowDistance_rect)
+    screen.blit(Scen2_DownArrowDistance_surf, Scen2_DownArrowDistance_rect)
+    screen.blit(Scen2_UpArrowMass_surf, Scen2_UpArrowMass_rect)
+    screen.blit(Scen2_DownArrowMass_surf, Scen2_DownArrowMass_rect)
+    screen.blit(Scen2_UpArrowInitialVelocity_surf, Scen2_UpArrowInitialVelocity_rect)
+    screen.blit(Scen2_DownArrowInitialVelocity_surf, Scen2_DownArrowInitialVelocity_rect)
+    screen.blit(Scen2_UpArrowGravity_surf, Scen2_UpArrowGravity_rect)
+    screen.blit(Scen2_DownArrowGravity_surf, Scen2_DownArrowGravity_rect)
+
+    screen.blit(Scen2_DistanceFromGroundMeasurementUnits_surf, Scen2_DistanceFromGroundMeasurementUnits_rect)
+    screen.blit(Scen2_MassDroppedMeasurementUnits_surf, Scen2_MassDroppedMeasurementUnits_rect)
+
+    Scen2_DistanceFromGroundNum_surf = Value_font.render(f'{Scen2_DistanceFromGroundValue}', False, (255, 255, 255))
+    Scen2_DistanceFromGroundNum_rect = Scen2_DistanceFromGroundNum_surf.get_rect(topleft=(20, 593))
+    screen.blit(Scen2_DistanceFromGroundNum_surf, Scen2_DistanceFromGroundNum_rect)
+
+    Scen2_DistanceFromGroundMeasurement_surf = Value_font.render(f'{Scen2_DistanceFromGroundValue}', False, (0, 0, 0))
+    Scen2_DistanceFromGroundMeasurement_rect = Scen2_DistanceFromGroundMeasurement_surf.get_rect(topleft=(740, 250))
+    screen.blit(Scen2_DistanceFromGroundMeasurement_surf, Scen2_DistanceFromGroundMeasurement_rect)
+
+    Scen2_MassDroppedNum_surf = Value_font.render(f'{Scen2_MassDroppedValue}', False, (255, 255, 255))
+    Scen2_MassDroppedNum_rect = Scen2_MassDroppedNum_surf.get_rect(topleft=(20, 643))
+    screen.blit(Scen2_MassDroppedNum_surf, Scen2_MassDroppedNum_rect)
+
+    Scen2_MassDroppedMeasurement_surf = Value_font.render(f'{Scen2_MassDroppedValue}', False, (0, 0, 0))
+    Scen2_MassDroppedMeasurement_rect = Scen2_MassDroppedMeasurement_surf.get_rect(topleft=(575, 55))
+    screen.blit(Scen2_MassDroppedMeasurement_surf, Scen2_MassDroppedMeasurement_rect)
+
+    Scen2_InitialVelocityNum_surf = Value_font.render(f'{Scen2_SpeedAtBeginningOfFrame}', False, (255, 255, 255))
+    Scen2_InitialVelocityNum_rect = Scen2_InitialVelocityNum_surf.get_rect(topleft=(200, 593))
+    screen.blit(Scen2_InitialVelocityNum_surf, Scen2_InitialVelocityNum_rect)
+
+    Scen2_InitialVelocityMeasurement_surf = Value_font.render(f'{Scen2_SpeedAtBeginningOfFrame}', False, (0, 0, 0))
+    Scen2_InitialVelocityMeasurement_rect = Scen2_InitialVelocityMeasurement_surf.get_rect(topleft=(575, 15))
+    screen.blit(Scen2_InitialVelocityMeasurement_surf, Scen2_InitialVelocityMeasurement_rect)
+
+    screen.blit(Scen2_InitialVelocityMeasurementUnits_surf, Scen2_InitialVelocityMeasurementUnits_rect)
+
+    Scen2_GravityNum_surf = Value_font.render(f'{round(Scen2_GravityValue, 2)}', False, (255, 255, 255))
+    Scen2_GravityNum_rect = Scen2_GravityNum_surf.get_rect(topleft=(195, 643))
+    screen.blit(Scen2_GravityNum_surf, Scen2_GravityNum_rect)
+
+    Scen2_ElapsedTimeStat_surf = DistanceFromGround_font.render("Time Elapsed: " + f'{round(Scen2_EndingTime, 1)}' + " s", False, (255, 255, 255))
+    Scen2_ElapsedTimeStat_rect = Scen2_ElapsedTimeStat_surf.get_rect(topleft=(470, 540))
+    screen.blit(Scen2_ElapsedTimeStat_surf, Scen2_ElapsedTimeStat_rect)
+
+    Scen2_DistanceStat_surf = DistanceFromGround_font.render("Distance Travelled: " + f'{round(Scen2_DistanceTravelledOverall, 1)}' + " m", False, (255, 255, 255))
+    Scen2_DistanceStat_rect = Scen2_DistanceStat_surf.get_rect(topleft=(470, 570))
+    screen.blit(Scen2_DistanceStat_surf, Scen2_DistanceStat_rect)
+
+    Scen2_InitialVelocityStat_surf = DistanceFromGround_font.render("Initial Velocity: " + f'{round(Scen2_InitialVelocityStat, 1)}' + " m/s", False, (255, 255, 255))
+    Scen2_InitialVelocityStat_rect = Scen2_InitialVelocityStat_surf.get_rect(topleft=(470, 600))
+    screen.blit(Scen2_InitialVelocityStat_surf, Scen2_InitialVelocityStat_rect)
+
+    Scen2_FinalVelocityStat_surf = DistanceFromGround_font.render("Final Velocity: " + f'{round(Scen2_ExtraVelocity, 1)}' + " m/s", False, (255, 255, 255))
+    Scen2_FinalVelocityStat_rect = Scen2_FinalVelocityStat_surf.get_rect(topleft=(470, 630))
+    screen.blit(Scen2_FinalVelocityStat_surf, Scen2_FinalVelocityStat_rect)
+
+    Scen2_AccelerationStat_surf = DistanceFromGround_font.render("Acceleration: " + f'{round(Scen2_GravityValue, 1)}' + " m/s^2", False, (255, 255, 255))
+    Scen2_AccelerationStat_rect = Scen2_AccelerationStat_surf.get_rect(topleft=(470, 660))
+    screen.blit(Scen2_AccelerationStat_surf, Scen2_AccelerationStat_rect)
+
+    Scen2_GravityMeasurementUnits_surf = Value_font.render("Fg = " + f'{round((Scen2_GravityValue * Scen2_MassDroppedValue), 1)}' + " N", False, (0, 0, 0))
+    Scen2_GravityMeasurementUnits_rect = Scen2_GravityMeasurementUnits_surf.get_rect(topleft=(1025, 55))
+    screen.blit(Scen2_GravityMeasurementUnits_surf, Scen2_GravityMeasurementUnits_rect)
+
+    Scen2_NormalForce_surf = Value_font.render("Fn = " + f'{round((Scen2_GravityValue * Scen2_MassDroppedValue), 1)}' + " N", False, (0, 0, 0))
+    Scen2_NormalForce_rect = Scen2_NormalForce_surf.get_rect(topleft=(1025, 15))
+    screen.blit(Scen2_NormalForce_surf, Scen2_NormalForce_rect)
+
+    pygame.draw.line(screen, '#000000', (1000, 50), (1000, 20), 3)
+    pygame.draw.line(screen, '#000000', (1000, 20), (995, 30), 3)
+    pygame.draw.line(screen, '#000000', (1000, 20), (1005, 30), 3)
+
+
+def Scenario2Action():
+    pygame.draw.circle(screen, '#ffffff', (600, Scen2_MassHeight), 30)
+
+    Scen2_InitialVelocityMeasurement_surf = Value_font.render(f'{round(Scen2_SpeedAtBeginningOfFrame, 2)}' + " m/s", False, (0, 0, 0))
+    Scen2_InitialVelocityMeasurement_rect = Scen2_InitialVelocityMeasurement_surf.get_rect(topleft=(575, 15))
+    screen.blit(Scen2_InitialVelocityMeasurement_surf, Scen2_InitialVelocityMeasurement_rect)
+
+    screen.blit(Scen2_DistanceFromGroundMeasurementUnits_surf, Scen2_DistanceFromGroundMeasurementUnits_rect)
+    Scen2_DistanceFromGroundMeasurement_surf = Value_font.render(f'{Scen2_DistanceFromGroundValue}', False, (0, 0, 0))
+    Scen2_DistanceFromGroundMeasurement_rect = Scen2_DistanceFromGroundMeasurement_surf.get_rect(topleft=(740, 250))
+    screen.blit(Scen2_DistanceFromGroundMeasurement_surf, Scen2_DistanceFromGroundMeasurement_rect)
+
+    Scen2_ElapsedTimeStat_surf = DistanceFromGround_font.render("Time Elapsed: " + f'{round(Scen2_EndingTime, 1)}' + " s", False, (255, 255, 255))
+    Scen2_ElapsedTimeStat_rect = Scen2_ElapsedTimeStat_surf.get_rect(topleft=(470, 540))
+    screen.blit(Scen2_ElapsedTimeStat_surf, Scen2_ElapsedTimeStat_rect)
+
+    Scen2_DistanceStat_surf = DistanceFromGround_font.render("Distance Travelled: " + f'{round(Scen2_DistanceTravelledOverall, 1)}' + " m", False, (255, 255, 255))
+    Scen2_DistanceStat_rect = Scen2_DistanceStat_surf.get_rect(topleft=(470, 570))
+    screen.blit(Scen2_DistanceStat_surf, Scen2_DistanceStat_rect)
+
+    Scen2_InitialVelocityStat_surf = DistanceFromGround_font.render("Initial Velocity: " + f'{round(Scen2_InitialVelocityStat, 1)}' + " m/s", False, (255, 255, 255))
+    Scen2_InitialVelocityStat_rect = Scen2_InitialVelocityStat_surf.get_rect(topleft=(470, 600))
+    screen.blit(Scen2_InitialVelocityStat_surf, Scen2_InitialVelocityStat_rect)
+
+    Scen2_FinalVelocityStat_surf = DistanceFromGround_font.render("Final Velocity: " + f'{round(Scen2_ExtraVelocity, 1)}' + " m/s", False, (255, 255, 255))
+    Scen2_FinalVelocityStat_rect = Scen2_FinalVelocityStat_surf.get_rect(topleft=(470, 630))
+    screen.blit(Scen2_FinalVelocityStat_surf, Scen2_FinalVelocityStat_rect)
+
+    Scen2_AccelerationStat_surf = DistanceFromGround_font.render("Acceleration: " + f'{round(Scen2_GravityValue, 1)}' + " m/s^2", False, (255, 255, 255))
+    Scen2_AccelerationStat_rect = Scen2_AccelerationStat_surf.get_rect(topleft=(470, 660))
+    screen.blit(Scen2_AccelerationStat_surf, Scen2_AccelerationStat_rect)
+
+    Scen2_GravityMeasurementUnits_surf = Value_font.render("Fg = " + f'{round((Scen1_GravityValue * Scen2_MassDroppedValue), 1)}' + " N", False, (0, 0, 0))
+    Scen2_GravityMeasurementUnits_rect = Scen2_GravityMeasurementUnits_surf.get_rect(topleft=(1025, 55))
+    screen.blit(Scen2_GravityMeasurementUnits_surf, Scen2_GravityMeasurementUnits_rect)
 
 
 def display_Scenario3():
@@ -191,9 +331,12 @@ Value_font = pygame.font.Font('Fonts/AovelSansRounded-rdDL.ttf', 20)
 ScenarioOne_active = False
 ScenarioOneAction = False
 ScenarioTwo_active = False
+ScenarioTwoAction = False
 ScenarioThree_active = False
 ScenarioSelect_active = True
 start_time = 0
+
+#  Scenario One Variables
 Scen1_InitialDistanceFromGroundValue = 40
 Scen1_DistanceFromGroundValue = 40
 Scen1_MassDroppedValue = 10
@@ -213,6 +356,26 @@ Scen1_EndingTime = 0
 Scen1_DistanceTravelledOverall = 0
 Scen1_InitialVelocityStat = 0
 
+#  Scenario Two Variables
+Scen2_MassHeight = 70
+Scen2_InitialDistanceFromGroundValue = 40
+Scen2_DistanceFromGroundValue = 40
+Scen2_MassDroppedValue = 10
+Scen2_HeightOfFloor = 366
+Scen2_DistanceTravelledDuringFrame = 0
+Scen2_SpeedAtBeginningOfFrame = 0
+Scen2_SpeedAtEndOfFrame = 0
+Scen2_CurrentDistanceFromGround = 40
+Scen2_TimeAtBeginningOfFrame = 0
+Scen2_GravityValue = 9.8
+Scen2_ExtraDistance = 0
+Scen2_ExtraTime = 0
+Scen2_ExtraVelocity = 0
+Scen2_FinalTime = 0
+Scen2_EndingTime = 0
+Scen2_DistanceTravelledOverall = 0
+Scen2_InitialVelocityStat = 0
+
 # Intro Screen
 title_surf = title_font.render("Simulated Physics Environment", False, (255, 255, 255))
 title_rect = title_surf.get_rect(topleft=(10, 0))
@@ -229,6 +392,9 @@ ScenarioOneSelect_rect = ScenarioOneSelect_surf.get_rect(topleft=(200, 190))
 
 ScenarioOneText_surf = scenarios_font.render("An object dropping of a bridge", False, (255, 255, 255))
 ScenarioOneText_rect = ScenarioOneText_surf.get_rect(topleft=(400, 210))
+
+ScenarioTwoText_surf = scenarios_font.render("An object being launched off a cliff", False, (255, 255, 255))
+ScenarioTwoText_rect = ScenarioTwoText_surf.get_rect(topleft=(400, 340))
 
 ScenarioTwoSelect_surf = pygame.image.load('Graphics/Buttons/SelectGrey.png').convert_alpha()
 ScenarioTwoSelect_surf = pygame.transform.scale(ScenarioTwoSelect_surf, (200, 75))
@@ -315,6 +481,83 @@ Scen1_DownArrowGravity_surf = pygame.image.load('Graphics/UpAndDownArrows/DownAr
 Scen1_DownArrowGravity_surf = pygame.transform.scale(Scen1_DownArrowGravity_surf, (80, 30))
 Scen1_DownArrowGravity_rect = Scen1_DownArrowGravity_surf.get_rect(topleft=(162, 655))
 
+#  Scenario 2
+Scen2_Cliff_surf = pygame.image.load('Graphics/Scenario2/Cliff.png').convert_alpha()
+Scen2_Cliff_surf = pygame.transform.scale(Scen2_Cliff_surf, (550, 392.8))
+Scen2_Cliff_rect = Scen2_Cliff_surf.get_rect(topleft=(700, 30))
+
+Scen2_ground_surf = pygame.image.load('Graphics/Ground.png').convert_alpha()
+Scen2_ground_surf = pygame.transform.scale(Scen2_ground_surf, (1200, 300))
+Scen2_ground_rect = Scen2_ground_surf.get_rect(topleft=(0, 300))
+
+Scen2_BackButton_surf = pygame.image.load('Graphics/Buttons/Back.png').convert_alpha()
+Scen2_BackButton_surf = pygame.transform.scale(Scen2_BackButton_surf, (150, 70))
+Scen2_BackButton_rect = Scen2_BackButton_surf.get_rect(topleft=(0, 0))
+
+Scen2_PhysicsInfo_surf = PhysicsInfo_font.render("Physics Information", False, (255, 255, 255))
+Scen2_PhysicsInfo_rect = Scen2_PhysicsInfo_surf.get_rect(topleft=(30, 535))
+
+Scen2_DistanceFromGround_surf = DistanceFromGround_font.render("Distance (m)", False, (255, 255, 255))
+Scen2_DistanceFromGround_rect = Scen2_DistanceFromGround_surf.get_rect(topleft=(50, 593))
+
+Scen2_UpArrowDistance_surf = pygame.image.load('Graphics/UpAndDownArrows/UpArrow.png').convert_alpha()
+Scen2_UpArrowDistance_surf = pygame.transform.scale(Scen2_UpArrowDistance_surf, (80, 30))
+Scen2_UpArrowDistance_rect = Scen2_UpArrowDistance_surf.get_rect(topleft=(0, 575))
+
+Scen2_DownArrowDistance_surf = pygame.image.load('Graphics/UpAndDownArrows/DownArrow.png').convert_alpha()
+Scen2_DownArrowDistance_surf = pygame.transform.scale(Scen2_DownArrowDistance_surf, (80, 30))
+Scen2_DownArrowDistance_rect = Scen2_DownArrowDistance_surf.get_rect(topleft=(-18, 605))
+
+Scen2_MassDropped_surf = DistanceFromGround_font.render("Mass (Kg)", False, (255, 255, 255))
+Scen2_MassDropped_rect = Scen2_MassDropped_surf.get_rect(topleft=(50, 643))
+
+Scen2_MassDroppedMeasurementUnits_surf = Value_font.render("Kg", False, (0, 0, 0))
+Scen2_MassDroppedMeasurementUnits_rect = Scen2_MassDroppedMeasurementUnits_surf.get_rect(topleft=(605, 55))
+
+Scen2_UpArrowMass_surf = pygame.image.load('Graphics/UpAndDownArrows/UpArrow.png').convert_alpha()
+Scen2_UpArrowMass_surf = pygame.transform.scale(Scen2_UpArrowMass_surf, (80, 30))
+Scen2_UpArrowMass_rect = Scen2_UpArrowMass_surf.get_rect(topleft=(0, 625))
+
+Scen2_DownArrowMass_surf = pygame.image.load('Graphics/UpAndDownArrows/DownArrow.png').convert_alpha()
+Scen2_DownArrowMass_surf = pygame.transform.scale(Scen2_DownArrowMass_surf, (80, 30))
+Scen2_DownArrowMass_rect = Scen2_DownArrowMass_surf.get_rect(topleft=(-18, 655))
+
+Scen2_DistanceFromGroundMeasurementUnits_surf = Value_font.render("m", False, (0, 0, 0))
+Scen2_DistanceFromGroundMeasurementUnits_rect = Scen2_DistanceFromGroundMeasurementUnits_surf.get_rect(topleft=(770, 250))
+
+Scen2_StartButton_surf = pygame.image.load('Graphics/Buttons/Start.png').convert_alpha()
+Scen2_StartButton_surf = pygame.transform.scale(Scen2_StartButton_surf, (150, 70))
+Scen2_StartButton_rect = Scen2_StartButton_surf.get_rect(topleft=(800, 570))
+
+Scen2_StopButton_surf = pygame.image.load('Graphics/Buttons/Stop.png').convert_alpha()
+Scen2_StopButton_surf = pygame.transform.scale(Scen2_StopButton_surf, (180, 90))
+Scen2_StopButton_rect = Scen2_StopButton_surf.get_rect(topleft=(1000, 560))
+
+Scen2_InitialVelocity_surf = DistanceFromGround_font.render("Initial Velocity (m/s)", False, (255, 255, 255))
+Scen2_InitialVelocity_rect = Scen2_InitialVelocity_surf.get_rect(topleft=(230, 593))
+
+Scen2_InitialVelocityMeasurementUnits_surf = Value_font.render("m/s", False, (0, 0, 0))
+Scen2_InitialVelocityMeasurementUnits_rect = Scen2_InitialVelocityMeasurementUnits_surf.get_rect(topleft=(605, 15))
+
+Scen2_UpArrowInitialVelocity_surf = pygame.image.load('Graphics/UpAndDownArrows/UpArrow.png').convert_alpha()
+Scen2_UpArrowInitialVelocity_surf = pygame.transform.scale(Scen2_UpArrowInitialVelocity_surf, (80, 30))
+Scen2_UpArrowInitialVelocity_rect = Scen2_UpArrowInitialVelocity_surf.get_rect(topleft=(180, 575))
+
+Scen2_DownArrowInitialVelocity_surf = pygame.image.load('Graphics/UpAndDownArrows/DownArrow.png').convert_alpha()
+Scen2_DownArrowInitialVelocity_surf = pygame.transform.scale(Scen2_DownArrowInitialVelocity_surf, (80, 30))
+Scen2_DownArrowInitialVelocity_rect = Scen2_DownArrowInitialVelocity_surf.get_rect(topleft=(162, 605))
+
+Scen2_Gravity_surf = DistanceFromGround_font.render("Gravity (m/s^2)", False, (255, 255, 255))
+Scen2_Gravity_rect = Scen2_Gravity_surf.get_rect(topleft=(230, 643))
+
+Scen2_UpArrowGravity_surf = pygame.image.load('Graphics/UpAndDownArrows/UpArrow.png').convert_alpha()
+Scen2_UpArrowGravity_surf = pygame.transform.scale(Scen2_UpArrowGravity_surf, (80, 30))
+Scen2_UpArrowGravity_rect = Scen2_UpArrowGravity_surf.get_rect(topleft=(180, 625))
+
+Scen2_DownArrowGravity_surf = pygame.image.load('Graphics/UpAndDownArrows/DownArrow.png').convert_alpha()
+Scen2_DownArrowGravity_surf = pygame.transform.scale(Scen2_DownArrowGravity_surf, (80, 30))
+Scen2_DownArrowGravity_rect = Scen2_DownArrowGravity_surf.get_rect(topleft=(162, 655))
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -399,6 +642,53 @@ while True:
                 pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
                 ScenarioSelect_active = True
 
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_StartButton_rect.collidepoint(mouse_pos):
+                ScenarioTwoAction = True
+
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_StopButton_rect.collidepoint(mouse_pos):
+                if Scen2_MassHeight < Scen2_DistanceTravelledDuringFrame:
+                    ScenarioTwoAction = False
+                else:
+                    ScenarioTwoAction = False
+                    Scen2_MassHeight = 70
+                    Scen2_DistanceTravelledDuringFrame = 0
+                    Scen2_SpeedAtBeginningOfFrame = 0
+                    Scen2_SpeedAtEndOfFrame = 0
+                    Scen2_CurrentDistanceFromGround = Scen2_DistanceFromGroundValue
+                    Scen2_TimeAtBeginningOfFrame = 0
+                    Scen2_DistanceTravelledOverall = 0
+                    Scen2_InitialVelocityStat = 0
+
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowDistance_rect.collidepoint(mouse_pos):
+                Scen2_DistanceFromGroundValue += 1
+                Scen2_CurrentDistanceFromGround += 1
+                Scen2_InitialDistanceFromGroundValue += 1
+
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowDistance_rect.collidepoint(mouse_pos) and Scen2_DistanceFromGroundValue > 1:
+                Scen2_DistanceFromGroundValue -= 1
+                Scen2_CurrentDistanceFromGround -= 1
+                Scen2_InitialDistanceFromGroundValue -= 1
+
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowMass_rect.collidepoint(mouse_pos):
+                Scen2_MassDroppedValue += 1
+
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowMass_rect.collidepoint(mouse_pos) and Scen2_MassDroppedValue > 1:
+                Scen2_MassDroppedValue -= 1
+
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowInitialVelocity_rect.collidepoint(mouse_pos):
+                Scen2_SpeedAtBeginningOfFrame += 1
+                Scen2_InitialVelocityStat += 1
+
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowInitialVelocity_rect.collidepoint(mouse_pos):
+                Scen2_SpeedAtBeginningOfFrame -= 1
+                Scen2_InitialVelocityStat -= 1
+
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowGravity_rect.collidepoint(mouse_pos):
+                Scen2_GravityValue += 0.1
+
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowGravity_rect.collidepoint(mouse_pos) and Scen2_GravityValue > 0.2:
+                Scen2_GravityValue -= 0.1
+
         if ScenarioThree_active:
             mouse_pos = pygame.mouse.get_pos()
             if event.type == pygame.MOUSEBUTTONDOWN and Scen1_BackButton_rect.collidepoint(mouse_pos):
@@ -451,8 +741,43 @@ while True:
             start_time = pygame.time.get_ticks()
 
     if ScenarioTwo_active:
-        pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
-        display_Scenario2()
+        if ScenarioTwoAction:
+            pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
+            display_Scenario2()
+            Scenario2Action()
+            Scen2_current_time = pygame.time.get_ticks() - start_time
+
+            if Scen2_MassHeight < 366 and Scen2_CurrentDistanceFromGround > Scen2_DistanceTravelledDuringFrame:
+                Scen2_DistanceTravelledDuringFrame = (Scen2_SpeedAtBeginningOfFrame * 0.05) + (0.5 * Scen2_GravityValue * (0.05 * 0.05))
+                Scen2_SpeedAtEndOfFrame = ((2 * Scen2_DistanceTravelledDuringFrame) / 0.05) - Scen2_SpeedAtBeginningOfFrame
+                Scen2_DistanceTravelledToPx = Scen2_DistanceTravelledDuringFrame / (Scen2_DistanceFromGroundValue / 294)
+                Scen2_MassHeight += Scen2_DistanceTravelledToPx
+
+                Scen2_current_time = pygame.time.get_ticks() - start_time
+                Scen2_DifferenceInTime = Scen2_current_time - Scen2_TimeAtBeginningOfFrame
+                Scen2_FinalTime = Scen2_current_time - Scen2_DifferenceInTime
+
+                Scen2_SpeedAtBeginningOfFrame = Scen2_SpeedAtEndOfFrame
+                Scen2_TimeAtBeginningOfFrame = Scen2_current_time
+                Scen2_CurrentDistanceFromGround -= Scen2_DistanceTravelledDuringFrame
+                Scen2_EndingTime = Scen2_FinalTime / 1000
+                Scen2_DistanceTravelledOverall = Scen2_InitialDistanceFromGroundValue - Scen2_CurrentDistanceFromGround
+
+            else:
+                Scen2_ExtraDistance = Scen2_HeightOfFloor - Scen2_MassHeight
+                Scen2_ExtraTime = 0.05 * Scen2_ExtraDistance
+                Scen2_CurrentDistanceFromGround -= Scen2_CurrentDistanceFromGround
+                Scen2_MassHeight += Scen2_ExtraDistance
+                Scen2_FinalTime += Scen2_ExtraTime * 100
+                Scen2_EndingTime = Scen2_FinalTime / 1000
+                Scen2_DistanceTravelledOverall = Scen2_InitialDistanceFromGroundValue - Scen2_CurrentDistanceFromGround
+                Scen2_ExtraVelocity = Scen2_SpeedAtBeginningOfFrame + (Scen2_GravityValue * Scen2_ExtraTime)
+
+        else:
+            pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
+            display_Scenario2()
+            Scenario2ValuesUpdate()
+            start_time = pygame.time.get_ticks()
 
     if ScenarioThree_active:
         pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
