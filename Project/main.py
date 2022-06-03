@@ -180,7 +180,7 @@ def display_Scenario2():
 
     screen.blit(Scen2_StartButton_surf, Scen2_StartButton_rect)
     screen.blit(Scen2_StopButton_surf, Scen2_StopButton_rect)
-    pygame.draw.circle(screen, '#ffffff', (600, Scen2_MassHeight), 30)
+    pygame.draw.circle(screen, '#ffffff', (Scen2_MassDisplacementx, Scen2_MassHeight), 15)
     screen.blit(Scen2_InitialVelocity_surf, Scen2_InitialVelocity_rect)
     screen.blit(Scen2_Gravity_surf, Scen2_Gravity_rect)
 
@@ -281,7 +281,7 @@ def Scenario2ValuesUpdate():
     screen.blit(Scen2_NormalForce_surf, Scen2_NormalForce_rect)
 
 def Scenario2Action():
-    pygame.draw.circle(screen, '#ffffff', (600, Scen2_MassHeight), 30)
+    pygame.draw.circle(screen, '#ffffff', (Scen2_MassDisplacementx, Scen2_MassHeight), 15)
 
     #Scen2_InitialVelocityMeasurement_surf = Value_font.render(f'{round(Scen2_SpeedAtBeginningOfFrame, 2)}' + " m/s", False, (0, 0, 0))
     #Scen2_InitialVelocityMeasurement_rect = Scen2_InitialVelocityMeasurement_surf.get_rect(topleft=(575, 15))
@@ -365,15 +365,17 @@ Scen1_DistanceTravelledOverall = 0
 Scen1_InitialVelocityStat = 0
 
 #  Scenario Two Variables
-Scen2_MassHeight = 70
-Scen2_InitialDistanceFromGroundValue = 40
-Scen2_DistanceFromGroundValue = 40
+Scen2_MassHeight = 170
+Scen2_MassDisplacementx = 1020
+Scen2_InitialDistanceFromGroundValue = 20
+Scen2_DistanceFromGroundValue = 20
 Scen2_MassDroppedValue = 10
-Scen2_HeightOfFloor = 366
-Scen2_DistanceTravelledDuringFrame = 0
+Scen2_HeightOfFloor = 417
+Scen2_DistanceTravelledVERTDuringFrame = 0
+Scen2_DistanceTravelledHORIZDuringFrame = 0
 Scen2_SpeedAtBeginningOfFrame = 0
 Scen2_SpeedAtEndOfFrame = 0
-Scen2_CurrentDistanceFromGround = 40
+Scen2_CurrentDistanceFromGround = 20
 Scen2_TimeAtBeginningOfFrame = 0
 Scen2_GravityValue = 9.8
 Scen2_ExtraDistance = 0
@@ -649,12 +651,14 @@ while True:
                 ScenarioTwoAction = True
 
             if event.type == pygame.MOUSEBUTTONDOWN and Scen2_StopButton_rect.collidepoint(mouse_pos):
-                if Scen2_MassHeight < Scen2_DistanceTravelledDuringFrame:
+                if Scen2_MassHeight < Scen2_DistanceTravelledVERTDuringFrame:
                     ScenarioTwoAction = False
                 else:
                     ScenarioTwoAction = False
-                    Scen2_MassHeight = 70
-                    Scen2_DistanceTravelledDuringFrame = 0
+                    Scen2_MassHeight = 170
+                    Scen2_MassDisplacementx = 1020
+                    Scen2_DistanceTravelledVERTDuringFrame = 0
+                    Scen2_DistanceTravelledHORIZDuringFrame = 0
                     Scen2_SpeedAtBeginningOfFrame = 0
                     Scen2_SpeedAtEndOfFrame = 0
                     Scen2_CurrentDistanceFromGround = Scen2_DistanceFromGroundValue
@@ -714,7 +718,7 @@ while True:
             if Scen1_DroppedMassHeight < 366 and Scen1_CurrentDistanceFromGround > Scen1_DistanceTravelledDuringFrame:
                 Scen1_DistanceTravelledDuringFrame = (Scen1_SpeedAtBeginningOfFrame * 0.05) + (0.5 * Scen1_GravityValue * (0.05 * 0.05))
                 Scen1_SpeedAtEndOfFrame = ((2 * Scen1_DistanceTravelledDuringFrame) / 0.05) - Scen1_SpeedAtBeginningOfFrame
-                Scen1_DistanceTravelledToPx = Scen1_DistanceTravelledDuringFrame / (Scen1_DistanceFromGroundValue / 294)
+                Scen1_DistanceTravelledToPx = Scen1_DistanceTravelledDuringFrame / (Scen1_DistanceFromGroundValue / 296)
                 Scen1_DroppedMassHeight += Scen1_DistanceTravelledToPx
 
                 Scen1_current_time = pygame.time.get_ticks() - start_time
@@ -755,11 +759,11 @@ while True:
             Scen2_current_time = pygame.time.get_ticks() - start_time
 
 
-            if Scen2_MassHeight < 366 and Scen2_CurrentDistanceFromGround > Scen2_DistanceTravelledDuringFrame:
+            if Scen2_MassHeight < Scen2_HeightOfFloor and Scen2_CurrentDistanceFromGround > Scen2_DistanceTravelledVERTDuringFrame:
                 #  VERT
-                Scen2_DistanceTravelledDuringFrame = (Scen2_SpeedAtBeginningOfFrame * 0.05) + (0.5 * Scen2_GravityValue * (0.05 * 0.05))
-                Scen2_SpeedAtEndOfFrame = ((2 * Scen2_DistanceTravelledDuringFrame) / 0.05) - Scen2_SpeedAtBeginningOfFrame
-                Scen2_DistanceTravelledToPx = Scen2_DistanceTravelledDuringFrame / (Scen2_DistanceFromGroundValue / 294)
+                Scen2_DistanceTravelledVERTDuringFrame = (Scen2_SpeedAtBeginningOfFrame * 0.05) + (0.5 * Scen2_GravityValue * (0.05 * 0.05))
+                Scen2_SpeedAtEndOfFrame = ((2 * Scen2_DistanceTravelledVERTDuringFrame) / 0.05) - Scen2_SpeedAtBeginningOfFrame
+                Scen2_DistanceTravelledToPx = Scen2_DistanceTravelledVERTDuringFrame / (Scen2_DistanceFromGroundValue / 247)
                 Scen2_MassHeight += Scen2_DistanceTravelledToPx
 
                 Scen2_current_time = pygame.time.get_ticks() - start_time
@@ -768,11 +772,12 @@ while True:
 
                 Scen2_SpeedAtBeginningOfFrame = Scen2_SpeedAtEndOfFrame
                 Scen2_TimeAtBeginningOfFrame = Scen2_current_time
-                Scen2_CurrentDistanceFromGround -= Scen2_DistanceTravelledDuringFrame
+                Scen2_CurrentDistanceFromGround -= Scen2_DistanceTravelledVERTDuringFrame
                 Scen2_EndingTime = Scen2_FinalTime / 1000
                 Scen2_DistanceTravelledOverall = Scen2_InitialDistanceFromGroundValue - Scen2_CurrentDistanceFromGround
 
                 #  HORIZ
+                Scen2_HorizontalVelocity = Scen2_InitialVelocityStat*(math.cos(Scen2_AngleLaunched * (math.pi / 180)))
 
 
 
