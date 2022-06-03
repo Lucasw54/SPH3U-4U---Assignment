@@ -384,10 +384,6 @@ Scen2_EndingTime = 0
 Scen2_DistanceTravelledOverall = 0
 Scen2_InitialVelocityStat = 0
 Scen2_AngleLaunched = 45
-Scen2_CannonEndx = 1020 - 49.49747
-Scen2_CannonEndy = 170 - 49.49747
-Scen2_Cannon_a = 70 * (math.sin(Scen2_AngleLaunched*(math.pi/180)))
-Scen2_Cannon_b = 70 * (math.cos(Scen2_AngleLaunched*(math.pi/180)))
 
 # Intro Screen
 title_surf = title_font.render("Simulated Physics Environment", False, (255, 255, 255))
@@ -748,13 +744,16 @@ while True:
             start_time = pygame.time.get_ticks()
 
     if ScenarioTwo_active:
-        print(Scen2_Cannon_a)
-        print(Scen2_Cannon_b)
+        Scen2_Cannon_a = 70 * (math.sin(Scen2_AngleLaunched * (math.pi / 180)))
+        Scen2_Cannon_b = 70 * (math.cos(Scen2_AngleLaunched * (math.pi / 180)))
+        Scen2_CannonEndx = 1020 - Scen2_Cannon_b
+        Scen2_CannonEndy = 170 - Scen2_Cannon_a
         if ScenarioTwoAction:
             pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
             display_Scenario2()
             Scenario2Action()
             Scen2_current_time = pygame.time.get_ticks() - start_time
+
 
             if Scen2_MassHeight < 366 and Scen2_CurrentDistanceFromGround > Scen2_DistanceTravelledDuringFrame:
                 #  VERT
