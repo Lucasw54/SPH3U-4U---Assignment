@@ -661,7 +661,6 @@ while True:
                     Scen2_CurrentDistanceFromGround = Scen2_DistanceFromGroundValue
                     Scen2_TimeAtBeginningOfFrame = 0
                     Scen2_DistanceTravelledOverall = 0
-                    Scen2_InitialVelocityStat = -15
 
             if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowDistance_rect.collidepoint(mouse_pos):
                 Scen2_DistanceFromGroundValue += 1
