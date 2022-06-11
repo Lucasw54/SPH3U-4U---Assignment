@@ -238,7 +238,7 @@ def Scenario2ValuesUpdate():
     Scen2_MassDroppedMeasurement_rect = Scen2_MassDroppedMeasurement_surf.get_rect(topleft=(575, 55))
     screen.blit(Scen2_MassDroppedMeasurement_surf, Scen2_MassDroppedMeasurement_rect)
 
-    Scen2_InitialVelocityNum_surf = Value_font.render(f'{Scen2_SpeedAtBeginningOfFrame}', False, (255, 255, 255))
+    Scen2_InitialVelocityNum_surf = Value_font.render(f'{abs(Scen2_SpeedAtBeginningOfFrame)}', False, (255, 255, 255))
     Scen2_InitialVelocityNum_rect = Scen2_InitialVelocityNum_surf.get_rect(topleft=(200, 593))
     screen.blit(Scen2_InitialVelocityNum_surf, Scen2_InitialVelocityNum_rect)
 
@@ -260,7 +260,7 @@ def Scenario2ValuesUpdate():
     Scen2_DistanceStat_rect = Scen2_DistanceStat_surf.get_rect(topleft=(470, 570))
     screen.blit(Scen2_DistanceStat_surf, Scen2_DistanceStat_rect)
 
-    Scen2_InitialVelocityStat_surf = DistanceFromGround_font.render("Initial Velocity: " + f'{round(Scen2_InitialVelocityStat, 1)}' + " m/s", False, (255, 255, 255))
+    Scen2_InitialVelocityStat_surf = DistanceFromGround_font.render("Initial Velocity: " + f'{round(abs(Scen2_InitialVelocityStat), 1)}' + " m/s", False, (255, 255, 255))
     Scen2_InitialVelocityStat_rect = Scen2_InitialVelocityStat_surf.get_rect(topleft=(470, 600))
     screen.blit(Scen2_InitialVelocityStat_surf, Scen2_InitialVelocityStat_rect)
 
@@ -299,7 +299,7 @@ def Scenario2Action():
     Scen2_DistanceStat_rect = Scen2_DistanceStat_surf.get_rect(topleft=(470, 570))
     screen.blit(Scen2_DistanceStat_surf, Scen2_DistanceStat_rect)
 
-    Scen2_InitialVelocityStat_surf = DistanceFromGround_font.render("Initial Velocity: " + f'{round(Scen2_InitialVelocityStat, 1)}' + " m/s", False, (255, 255, 255))
+    Scen2_InitialVelocityStat_surf = DistanceFromGround_font.render("Initial Velocity: " + f'{round(abs(Scen2_InitialVelocityStat), 1)}' + " m/s", False, (255, 255, 255))
     Scen2_InitialVelocityStat_rect = Scen2_InitialVelocityStat_surf.get_rect(topleft=(470, 600))
     screen.blit(Scen2_InitialVelocityStat_surf, Scen2_InitialVelocityStat_rect)
 
@@ -373,7 +373,7 @@ Scen2_MassDroppedValue = 10
 Scen2_HeightOfFloor = 417
 Scen2_DistanceTravelledVERTDuringFrame = 0
 Scen2_DistanceTravelledHORIZDuringFrame = 0
-Scen2_SpeedAtBeginningOfFrame = 0
+Scen2_SpeedAtBeginningOfFrame = -20
 Scen2_SpeedAtEndOfFrame = 0
 Scen2_CurrentDistanceFromGround = 20
 Scen2_TimeAtBeginningOfFrame = 0
@@ -384,7 +384,7 @@ Scen2_ExtraVelocity = 0
 Scen2_FinalTime = 0
 Scen2_EndingTime = 0
 Scen2_DistanceTravelledOverall = 0
-Scen2_InitialVelocityStat = 0
+Scen2_InitialVelocityStat = -20
 Scen2_AngleLaunched = 45
 
 # Intro Screen
@@ -659,12 +659,12 @@ while True:
                     Scen2_MassDisplacementx = 1020
                     Scen2_DistanceTravelledVERTDuringFrame = 0
                     Scen2_DistanceTravelledHORIZDuringFrame = 0
-                    Scen2_SpeedAtBeginningOfFrame = 0
+                    Scen2_SpeedAtBeginningOfFrame = -20
                     Scen2_SpeedAtEndOfFrame = 0
                     Scen2_CurrentDistanceFromGround = Scen2_DistanceFromGroundValue
                     Scen2_TimeAtBeginningOfFrame = 0
                     Scen2_DistanceTravelledOverall = 0
-                    Scen2_InitialVelocityStat = 0
+                    Scen2_InitialVelocityStat = -20
 
             if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowDistance_rect.collidepoint(mouse_pos):
                 Scen2_DistanceFromGroundValue += 1
@@ -683,12 +683,12 @@ while True:
                 Scen2_AngleLaunched -= 1
 
             if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowInitialVelocity_rect.collidepoint(mouse_pos):
-                Scen2_SpeedAtBeginningOfFrame += 1
-                Scen2_InitialVelocityStat += 1
-
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowInitialVelocity_rect.collidepoint(mouse_pos):
                 Scen2_SpeedAtBeginningOfFrame -= 1
                 Scen2_InitialVelocityStat -= 1
+
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowInitialVelocity_rect.collidepoint(mouse_pos) and Scen2_InitialVelocityStat > 0:
+                Scen2_SpeedAtBeginningOfFrame += 1
+                Scen2_InitialVelocityStat += 1
 
             if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowGravity_rect.collidepoint(mouse_pos):
                 Scen2_GravityValue += 0.1
