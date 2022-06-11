@@ -378,10 +378,7 @@ Scen2_AngleLaunched = 45
 Scen2_InitialVelocityStat = -15
 Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat*(math.cos(Scen2_AngleLaunched * (math.pi / 180)))
 Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat*(math.sin(Scen2_AngleLaunched) * (math.pi / 180))
-Scen2_TEST = math.sin(45)
-
-print(Scen2_TEST)
-Scen2_InitialVerticalVelocityStat = Scen2_InitialVelocityStat*math.cos(Scen2_AngleLaunched)
+Scen2_InitialVerticalVelocityStat = Scen2_InitialVelocityStat*(math.cos(Scen2_AngleLaunched * (math.pi / 180)))
 Scen2_FinalVerticalVelocityStat = math.sqrt((Scen2_InitialVerticalVelocityStat * Scen2_InitialVerticalVelocityStat) + (2 * Scen2_GravityValue * Scen2_InitialDistanceFromGroundValue))
 Scen2_EstimatedAirTime = (Scen2_FinalVerticalVelocityStat - Scen2_InitialVerticalVelocityStat)/9.8
 
@@ -658,7 +655,8 @@ while True:
                     Scen2_DistanceTravelledVERTDuringFrame = 0
                     Scen2_DistanceTravelledHORIZDuringFrame = 0
                     Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.cos(Scen2_AngleLaunched * (math.pi / 180)))
-                    Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.cos(Scen2_AngleLaunched * (math.pi / 180)))
+                    Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.sin(Scen2_AngleLaunched * (math.pi / 180)))
+
                     Scen2_SpeedAtEndOfFrame = 0
                     Scen2_CurrentDistanceFromGround = Scen2_DistanceFromGroundValue
                     Scen2_TimeAtBeginningOfFrame = 0
@@ -675,21 +673,21 @@ while True:
                 Scen2_CurrentDistanceFromGround -= 1
                 Scen2_InitialDistanceFromGroundValue -= 1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowAngle_rect.collidepoint(mouse_pos) and Scen2_AngleLaunched < 75:
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowAngle_rect.collidepoint(mouse_pos) and Scen2_AngleLaunched < 90:
                 Scen2_AngleLaunched += 1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowAngle_rect.collidepoint(mouse_pos) and Scen2_AngleLaunched > 45:
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowAngle_rect.collidepoint(mouse_pos) and Scen2_AngleLaunched > 0:
                 Scen2_AngleLaunched -= 1
 
             if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowInitialVelocity_rect.collidepoint(mouse_pos):
                 Scen2_InitialVelocityStat -= 1
-                Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat*math.cos(Scen2_AngleLaunched)
-                Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * math.cos(Scen2_AngleLaunched)
+                Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat*(math.cos(Scen2_AngleLaunched * (math.pi / 180)))
+                Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.cos(Scen2_AngleLaunched) * (math.pi / 180))
 
             if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowInitialVelocity_rect.collidepoint(mouse_pos) and abs(Scen2_InitialVelocityStat) > 0:
                 Scen2_InitialVelocityStat += 1
-                Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat*math.cos(Scen2_AngleLaunched)
-                Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * math.cos(Scen2_AngleLaunched)
+                Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat*(math.cos(Scen2_AngleLaunched * (math.pi / 180)))
+                Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.cos(Scen2_AngleLaunched * (math.pi / 180)))
 
             if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowGravity_rect.collidepoint(mouse_pos):
                 Scen2_GravityValue += 0.1
@@ -778,8 +776,8 @@ while True:
                 Scen2_DistanceTravelledOverall = Scen2_InitialDistanceFromGroundValue - Scen2_CurrentDistanceFromGround
 
                 #  HORIZ
-                Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * math.cos(Scen2_AngleLaunched)
-                Scen2_InitialVerticalVelocityStat = Scen2_InitialVelocityStat * math.cos(Scen2_AngleLaunched)
+                Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.cos(Scen2_AngleLaunched * (math.pi / 180)))
+                Scen2_InitialVerticalVelocityStat = Scen2_InitialVelocityStat * (math.cos(Scen2_AngleLaunched * (math.pi / 180)))
                 Scen2_FinalVerticalVelocityStat = math.sqrt((Scen2_InitialVerticalVelocityStat * Scen2_InitialVerticalVelocityStat) + (2 * Scen2_GravityValue * Scen2_InitialDistanceFromGroundValue))
                 Scen2_EstimatedAirTime = (Scen2_FinalVerticalVelocityStat - Scen2_InitialVerticalVelocityStat) / 9.8
                 Scen2_TotalDisplacementx = Scen2_HorizontalVelocityAtBeginningOfFrame*Scen2_EstimatedAirTime
@@ -787,8 +785,8 @@ while True:
                 #print(Scen2_HorizontalNumberOfFrames)
                 Scen2_DistanceTravelledHORIZDuringFrame = Scen2_TotalDisplacementx / Scen2_HorizontalNumberOfFrames
                 Scen2_DistanceTravelledHORIZToPx = Scen2_DistanceTravelledHORIZDuringFrame / 0.136
-                Scen2_CurrentDistanceFromLeft += Scen2_DistanceTravelledHORIZToPx
-                #print(Scen2_InitialVerticalVelocityStat)
+                Scen2_CurrentDistanceFromLeft -= abs(Scen2_DistanceTravelledHORIZToPx)
+                print(Scen2_VerticalVelocityAtBeginningOfFrame)
 
 
                 #  Random
