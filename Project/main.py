@@ -385,8 +385,11 @@ Scen2_EndingTime = 0
 Scen2_DistanceTravelledOverall = 0
 Scen2_AngleLaunched = 45
 Scen2_InitialVelocityStat = -15
-Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat*math.cos(Scen2_AngleLaunched)
-Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat*math.cos(Scen2_AngleLaunched)
+Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat*(math.cos(Scen2_AngleLaunched * (math.pi / 180)))
+Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat*(math.sin(Scen2_AngleLaunched) * (math.pi / 180))
+Scen2_TEST = math.sin(45)
+
+print(Scen2_TEST)
 Scen2_InitialVerticalVelocityStat = Scen2_InitialVelocityStat*math.cos(Scen2_AngleLaunched)
 Scen2_FinalVerticalVelocityStat = math.sqrt((Scen2_InitialVerticalVelocityStat * Scen2_InitialVerticalVelocityStat) + (2 * Scen2_GravityValue * Scen2_InitialDistanceFromGroundValue))
 Scen2_EstimatedAirTime = (Scen2_FinalVerticalVelocityStat - Scen2_InitialVerticalVelocityStat)/9.8
@@ -660,11 +663,11 @@ while True:
                 else:
                     ScenarioTwoAction = False
                     Scen2_MassHeight = 170
-                    Scen2_MassDisplacementx = 1020
+                    Scen2_CurrentDistanceFromLeft = 1020
                     Scen2_DistanceTravelledVERTDuringFrame = 0
                     Scen2_DistanceTravelledHORIZDuringFrame = 0
-                    Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * math.cos(Scen2_AngleLaunched)
-                    Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * math.cos(Scen2_AngleLaunched)
+                    Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.cos(Scen2_AngleLaunched * (math.pi / 180)))
+                    Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.cos(Scen2_AngleLaunched * (math.pi / 180)))
                     Scen2_SpeedAtEndOfFrame = 0
                     Scen2_CurrentDistanceFromGround = Scen2_DistanceFromGroundValue
                     Scen2_TimeAtBeginningOfFrame = 0
@@ -790,11 +793,11 @@ while True:
                 Scen2_EstimatedAirTime = (Scen2_FinalVerticalVelocityStat - Scen2_InitialVerticalVelocityStat) / 9.8
                 Scen2_TotalDisplacementx = Scen2_HorizontalVelocityAtBeginningOfFrame*Scen2_EstimatedAirTime
                 Scen2_HorizontalNumberOfFrames = Scen2_EstimatedAirTime / (1/20)
-                print(Scen2_HorizontalNumberOfFrames)
+                #print(Scen2_HorizontalNumberOfFrames)
                 Scen2_DistanceTravelledHORIZDuringFrame = Scen2_TotalDisplacementx / Scen2_HorizontalNumberOfFrames
                 Scen2_DistanceTravelledHORIZToPx = Scen2_DistanceTravelledHORIZDuringFrame / 0.136
                 Scen2_CurrentDistanceFromLeft += Scen2_DistanceTravelledHORIZToPx
-                #  print(Scen2_EstimatedAirTime)
+                #print(Scen2_InitialVerticalVelocityStat)
 
 
                 #  Random
