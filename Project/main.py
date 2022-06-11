@@ -194,10 +194,6 @@ def display_Scenario2():
     pygame.draw.line(screen, '#000000', (300, 20), (295, 30), 3)
     pygame.draw.line(screen, '#000000', (300, 20), (305, 30), 3)
 
-    #pygame.draw.line(screen, '#000000', (560, 20), (560, 40), 3)
-    #pygame.draw.line(screen, '#000000', (560, 40), (565, 35), 3)
-    #pygame.draw.line(screen, '#000000', (560, 40), (555, 35), 3)
-
     #  Cannon
     pygame.draw.circle(screen, '#000000', (980, 180), 10)
     pygame.draw.circle(screen, '#000000', (1060, 180), 10)
@@ -234,19 +230,13 @@ def Scenario2ValuesUpdate():
     Scen2_AngleNum_rect = Scen2_AngleNum_surf.get_rect(topleft=(20, 643))
     screen.blit(Scen2_AngleNum_surf, Scen2_AngleNum_rect)
 
-    Scen2_MassDroppedMeasurement_surf = Value_font.render(f'{Scen2_MassDroppedValue}', False, (0, 0, 0))
-    Scen2_MassDroppedMeasurement_rect = Scen2_MassDroppedMeasurement_surf.get_rect(topleft=(575, 55))
+    Scen2_MassDroppedMeasurement_surf = Small_font.render(f'{Scen2_MassDroppedValue}' + " Kg", False, (0, 0, 0))
+    Scen2_MassDroppedMeasurement_rect = Scen2_MassDroppedMeasurement_surf.get_rect(topleft=(Scen2_CurrentDistanceFromLeft-10, Scen2_MassHeight-5))
     screen.blit(Scen2_MassDroppedMeasurement_surf, Scen2_MassDroppedMeasurement_rect)
 
     Scen2_InitialVelocityNum_surf = Value_font.render(f'{abs(Scen2_InitialVelocityStat)}', False, (255, 255, 255))
     Scen2_InitialVelocityNum_rect = Scen2_InitialVelocityNum_surf.get_rect(topleft=(200, 593))
     screen.blit(Scen2_InitialVelocityNum_surf, Scen2_InitialVelocityNum_rect)
-
-    #Scen2_InitialVelocityMeasurement_surf = Value_font.render(f'{Scen2_VerticalVelocityAtBeginningOfFrame}', False, (0, 0, 0))
-    #Scen2_InitialVelocityMeasurement_rect = Scen2_InitialVelocityMeasurement_surf.get_rect(topleft=(575, 15))
-    #screen.blit(Scen2_InitialVelocityMeasurement_surf, Scen2_InitialVelocityMeasurement_rect)
-
-    #screen.blit(Scen2_InitialVelocityMeasurementUnits_surf, Scen2_InitialVelocityMeasurementUnits_rect)
 
     Scen2_GravityNum_surf = Value_font.render(f'{round(Scen2_GravityValue, 2)}', False, (255, 255, 255))
     Scen2_GravityNum_rect = Scen2_GravityNum_surf.get_rect(topleft=(195, 643))
@@ -283,12 +273,12 @@ def Scenario2ValuesUpdate():
 def Scenario2Action():
     pygame.draw.circle(screen, '#ffffff', (Scen2_CurrentDistanceFromLeft, Scen2_MassHeight), 15)
 
-    #Scen2_InitialVelocityMeasurement_surf = Value_font.render(f'{round(Scen2_VerticalVelocityAtBeginningOfFrame, 2)}' + " m/s", False, (0, 0, 0))
-    #Scen2_InitialVelocityMeasurement_rect = Scen2_InitialVelocityMeasurement_surf.get_rect(topleft=(575, 15))
-    #screen.blit(Scen2_InitialVelocityMeasurement_surf, Scen2_InitialVelocityMeasurement_rect)
+    Scen2_MassDroppedMeasurement_surf = Small_font.render(f'{Scen2_MassDroppedValue}' + " Kg", False, (0, 0, 0))
+    Scen2_MassDroppedMeasurement_rect = Scen2_MassDroppedMeasurement_surf.get_rect(topleft=(Scen2_CurrentDistanceFromLeft-10, Scen2_MassHeight-5))
+    screen.blit(Scen2_MassDroppedMeasurement_surf, Scen2_MassDroppedMeasurement_rect)
 
-    Scen2_DistanceFromGroundMeasurement_surf = Value_font.render(f'{Scen2_DistanceFromGroundValue}', False, (0, 0, 0))
-    Scen2_DistanceFromGroundMeasurement_rect = Scen2_DistanceFromGroundMeasurement_surf.get_rect(topleft=(740, 250))
+    Scen2_DistanceFromGroundMeasurement_surf = Value_font.render(f'{Scen2_DistanceFromGroundValue}' + " m", False, (0, 0, 0))
+    Scen2_DistanceFromGroundMeasurement_rect = Scen2_DistanceFromGroundMeasurement_surf.get_rect(topleft=(920, 280))
     screen.blit(Scen2_DistanceFromGroundMeasurement_surf, Scen2_DistanceFromGroundMeasurement_rect)
 
     Scen2_ElapsedTimeStat_surf = DistanceFromGround_font.render("Time Elapsed: " + f'{round(Scen2_EndingTime, 1)}' + " s", False, (255, 255, 255))
@@ -335,6 +325,7 @@ scenarios_font = pygame.font.Font('Fonts/AovelSansRounded-rdDL.ttf', 30)
 PhysicsInfo_font = pygame.font.Font('Fonts/AovelSansRounded-rdDL.ttf', 34)
 DistanceFromGround_font = pygame.font.Font('Fonts/AovelSansRounded-rdDL.ttf', 25)
 Value_font = pygame.font.Font('Fonts/AovelSansRounded-rdDL.ttf', 20)
+Small_font = pygame.font.Font('Fonts/AovelSansRounded-rdDL.ttf', 9)
 
 ScenarioOne_active = False
 ScenarioOneAction = False
@@ -684,10 +675,10 @@ while True:
                 Scen2_CurrentDistanceFromGround -= 1
                 Scen2_InitialDistanceFromGroundValue -= 1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowAngle_rect.collidepoint(mouse_pos):
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowAngle_rect.collidepoint(mouse_pos) and Scen2_AngleLaunched < 75:
                 Scen2_AngleLaunched += 1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowAngle_rect.collidepoint(mouse_pos) and Scen2_MassDroppedValue > 1:
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowAngle_rect.collidepoint(mouse_pos) and Scen2_AngleLaunched > 45:
                 Scen2_AngleLaunched -= 1
 
             if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowInitialVelocity_rect.collidepoint(mouse_pos):
