@@ -126,6 +126,7 @@ def Scenario1ValuesUpdate():
 
 def Scenario1Action():
     pygame.draw.circle(screen, '#ffffff', (600, Scen1_DroppedMassHeight), 30)
+    pygame.draw.rect(screen, '#000000', ((840, 550), (170, 100)))
 
     Scen1_InitialVelocityMeasurement_surf = Value_font.render(f'{round(Scen1_SpeedAtBeginningOfFrame, 2)}' + " m/s", False, (0, 0, 0))
     Scen1_InitialVelocityMeasurement_rect = Scen1_InitialVelocityMeasurement_surf.get_rect(topleft=(575, 15))
@@ -273,6 +274,7 @@ def Scenario2ValuesUpdate():
 
 def Scenario2Action():
     pygame.draw.circle(screen, '#ffffff', (Scen2_CurrentDistanceFromLeft, Scen2_MassHeight), 15)
+    pygame.draw.rect(screen, '#000000', ((840, 550), (170, 100)))
 
     Scen2_MassDroppedMeasurement_surf = Small_font.render(f'{Scen2_MassDroppedValue}' + " Kg", False, (0, 0, 0))
     Scen2_MassDroppedMeasurement_rect = Scen2_MassDroppedMeasurement_surf.get_rect(topleft=(Scen2_CurrentDistanceFromLeft-10, Scen2_MassHeight-5))
@@ -591,7 +593,7 @@ while True:
                 pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
                 ScenarioSelect_active = True
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_StartButton_rect.collidepoint(mouse_pos):
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_StartButton_rect.collidepoint(mouse_pos) and ScenarioOneAction == False:
                 ScenarioOneAction = True
 
             if event.type == pygame.MOUSEBUTTONDOWN and Scen1_StopButton_rect.collidepoint(mouse_pos):
@@ -608,34 +610,34 @@ while True:
                     Scen1_DistanceTravelledOverall = 0
                     Scen1_InitialVelocityStat = 0
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_UpArrowDistance_rect.collidepoint(mouse_pos):
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_UpArrowDistance_rect.collidepoint(mouse_pos) and ScenarioOneAction == False:
                 Scen1_DistanceFromGroundValue += 1
                 Scen1_CurrentDistanceFromGround += 1
                 Scen1_InitialDistanceFromGroundValue += 1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_DownArrowDistance_rect.collidepoint(mouse_pos) and Scen1_DistanceFromGroundValue > 1:
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_DownArrowDistance_rect.collidepoint(mouse_pos) and Scen1_DistanceFromGroundValue > 1 and ScenarioOneAction == False:
                 Scen1_DistanceFromGroundValue -= 1
                 Scen1_CurrentDistanceFromGround -= 1
                 Scen1_InitialDistanceFromGroundValue -= 1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_UpArrowMass_rect.collidepoint(mouse_pos):
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_UpArrowMass_rect.collidepoint(mouse_pos) and ScenarioOneAction == False:
                 Scen1_MassDroppedValue += 1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_DownArrowMass_rect.collidepoint(mouse_pos) and Scen1_MassDroppedValue > 1:
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_DownArrowMass_rect.collidepoint(mouse_pos) and Scen1_MassDroppedValue > 1 and ScenarioOneAction == False:
                 Scen1_MassDroppedValue -= 1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_UpArrowInitialVelocity_rect.collidepoint(mouse_pos):
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_UpArrowInitialVelocity_rect.collidepoint(mouse_pos) and ScenarioOneAction == False:
                 Scen1_SpeedAtBeginningOfFrame += 1
                 Scen1_InitialVelocityStat += 1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_DownArrowInitialVelocity_rect.collidepoint(mouse_pos) and Scen1_InitialVelocityStat > 0:
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_DownArrowInitialVelocity_rect.collidepoint(mouse_pos) and Scen1_InitialVelocityStat > 0 and ScenarioOneAction == False:
                 Scen1_SpeedAtBeginningOfFrame -= 1
                 Scen1_InitialVelocityStat -= 1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_UpArrowGravity_rect.collidepoint(mouse_pos):
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_UpArrowGravity_rect.collidepoint(mouse_pos) and ScenarioOneAction == False:
                 Scen1_GravityValue += 0.1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_DownArrowGravity_rect.collidepoint(mouse_pos) and Scen1_GravityValue > 0.2:
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_DownArrowGravity_rect.collidepoint(mouse_pos) and Scen1_GravityValue > 0.2 and ScenarioOneAction == False:
                 Scen1_GravityValue -= 0.1
 
         if ScenarioTwo_active:
@@ -645,7 +647,7 @@ while True:
                 pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
                 ScenarioSelect_active = True
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_StartButton_rect.collidepoint(mouse_pos):
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_StartButton_rect.collidepoint(mouse_pos) and ScenarioTwoAction == False:
                 ScenarioTwoAction = True
                 Scen2_MassHeight = 170
                 Scen2_CurrentDistanceFromLeft = 1020
@@ -680,17 +682,17 @@ while True:
                     Scen2_DisplacementxStat = 0
                     Scen2_DisplacementyStat = 0
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowDistance_rect.collidepoint(mouse_pos):
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowDistance_rect.collidepoint(mouse_pos) and ScenarioTwoAction == False:
                 Scen2_DistanceFromGroundValue += 1
                 Scen2_CurrentDistanceFromGround += 1
                 Scen2_InitialDistanceFromGroundValue += 1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowDistance_rect.collidepoint(mouse_pos) and Scen2_DistanceFromGroundValue > 1:
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowDistance_rect.collidepoint(mouse_pos) and Scen2_DistanceFromGroundValue > 1 and ScenarioTwoAction == False:
                 Scen2_DistanceFromGroundValue -= 1
                 Scen2_CurrentDistanceFromGround -= 1
                 Scen2_InitialDistanceFromGroundValue -= 1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowAngle_rect.collidepoint(mouse_pos) and Scen2_AngleLaunched < 90:
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowAngle_rect.collidepoint(mouse_pos) and Scen2_AngleLaunched < 90 and ScenarioTwoAction == False:
                 Scen2_AngleLaunched += 1
                 Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.cos(Scen2_AngleLaunched * (math.pi / 180)))
                 Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.sin(Scen2_AngleLaunched * (math.pi / 180)))
@@ -701,7 +703,7 @@ while True:
                 Scen2_FinalVerticalVelocityStat = math.sqrt((Scen2_InitialVerticalVelocityStat * Scen2_InitialVerticalVelocityStat) + (2 * Scen2_GravityValue * Scen2_InitialDistanceFromGroundValue))
                 Scen2_EstimatedAirTime = (Scen2_FinalVerticalVelocityStat - Scen2_InitialVerticalVelocityStat) / 9.8
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowAngle_rect.collidepoint(mouse_pos) and Scen2_AngleLaunched > 0:
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowAngle_rect.collidepoint(mouse_pos) and Scen2_AngleLaunched > 0 and ScenarioTwoAction == False:
                 Scen2_AngleLaunched -= 1
                 Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.cos(Scen2_AngleLaunched * (math.pi / 180)))
                 Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.sin(Scen2_AngleLaunched * (math.pi / 180)))
@@ -712,20 +714,20 @@ while True:
                 Scen2_FinalVerticalVelocityStat = math.sqrt((Scen2_InitialVerticalVelocityStat * Scen2_InitialVerticalVelocityStat) + (2 * Scen2_GravityValue * Scen2_InitialDistanceFromGroundValue))
                 Scen2_EstimatedAirTime = (Scen2_FinalVerticalVelocityStat - Scen2_InitialVerticalVelocityStat) / 9.8
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowInitialVelocity_rect.collidepoint(mouse_pos):
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowInitialVelocity_rect.collidepoint(mouse_pos) and ScenarioTwoAction == False:
                 Scen2_InitialVelocityStat -= 1
                 Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat*(math.cos(Scen2_AngleLaunched * (math.pi / 180)))
                 Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.cos(Scen2_AngleLaunched) * (math.pi / 180))
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowInitialVelocity_rect.collidepoint(mouse_pos) and abs(Scen2_InitialVelocityStat) > 0:
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowInitialVelocity_rect.collidepoint(mouse_pos) and abs(Scen2_InitialVelocityStat) > 0 and ScenarioTwoAction == False:
                 Scen2_InitialVelocityStat += 1
                 Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat*(math.cos(Scen2_AngleLaunched * (math.pi / 180)))
                 Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.cos(Scen2_AngleLaunched * (math.pi / 180)))
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowGravity_rect.collidepoint(mouse_pos):
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_UpArrowGravity_rect.collidepoint(mouse_pos) and ScenarioTwoAction == False:
                 Scen2_GravityValue += 0.1
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowGravity_rect.collidepoint(mouse_pos) and Scen2_GravityValue > 0.2:
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen2_DownArrowGravity_rect.collidepoint(mouse_pos) and Scen2_GravityValue > 0.2 and ScenarioTwoAction == False:
                 Scen2_GravityValue -= 0.1
 
         if ScenarioThree_active:
