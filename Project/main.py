@@ -16,7 +16,8 @@ def display_ScoreSelect():
     screen.blit(ScenarioTwoText_surf, ScenarioTwoText_rect)
     screen.blit(ScenarioTwoSelect_surf, ScenarioTwoSelect_rect)
 
-    #  screen.blit(ScenarioThreeSelect_surf, ScenarioThreeSelect_rect)
+    screen.blit(ScenarioThreeSelect_surf, ScenarioThreeSelect_rect)
+    screen.blit(ScenarioThreeText_surf, ScenarioThreeText_rect)
 
 
 def display_Scenario1():
@@ -346,6 +347,10 @@ def display_Scenario3():
     pygame.draw.line(screen, '#ffffff', (0, 695), (1200, 695), 10)
     screen.blit(Scen1_BackButton_surf, Scen1_BackButton_rect)
 
+def Scenario3ValuesUpdate():
+    
+
+def Scenario3Action():
 
 pygame.init()
 screen = pygame.display.set_mode((1200, 700))
@@ -448,6 +453,9 @@ ScenarioOneText_rect = ScenarioOneText_surf.get_rect(topleft=(400, 210))
 
 ScenarioTwoText_surf = scenarios_font.render("An object being launched off a cliff", False, (255, 255, 255))
 ScenarioTwoText_rect = ScenarioTwoText_surf.get_rect(topleft=(400, 340))
+
+ScenarioThreeText_surf = scenarios_font.render("A bungee jumper jumping off a cliff", False, (255, 255, 255))
+ScenarioThreeText_rect = ScenarioThreeText_surf.get_rect(topleft=(400, 470))
 
 ScenarioTwoSelect_surf = pygame.image.load('Graphics/Buttons/SelectGrey.png').convert_alpha()
 ScenarioTwoSelect_surf = pygame.transform.scale(ScenarioTwoSelect_surf, (200, 75))
