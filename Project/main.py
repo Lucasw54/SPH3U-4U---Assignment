@@ -447,10 +447,10 @@ def Scenario3Action():
 
     Scen3_MaxHeight_surf = DistanceFromGround_font.render("Max Height: " + f'{round(Scen3_MaxHeight, 1)}' + " m", False, (255, 255, 255))
     Scen3_MaxHeight_rect = Scen3_MaxHeight_surf.get_rect(topleft=(730, 600))
-    screen.blit(Scen3_MaxHeight_surf, Scen2_MaxHeight_rect)
+    screen.blit(Scen3_MaxHeight_surf, Scen3_MaxHeight_rect)
 
     Scen3_TotalEnergy_surf = DistanceFromGround_font.render("Total Energy: " + f'{round(Scen3_TotalEnergy, 1)}' + " J", False, (0, 0, 0))
-    Scen3_TotalEnergy_rect = Scen2_TotalEnergy_surf.get_rect(topleft=(10, 100))
+    Scen3_TotalEnergy_rect = Scen3_TotalEnergy_surf.get_rect(topleft=(10, 100))
     screen.blit(Scen3_TotalEnergy_surf, Scen3_TotalEnergy_rect)
 
     Scen3_KineticEnergy_surf = DistanceFromGround_font.render("Kinetic " + f'{round(Scen3_KineticEnergy, 1)}' + " J", False, (0, 0, 0))
@@ -461,7 +461,7 @@ def Scenario3Action():
     Scen3_GravitationalPotentialEnergy_rect = Scen3_GravitationalPotentialEnergy_surf.get_rect(topleft=(10, 160))
     screen.blit(Scen3_GravitationalPotentialEnergy_surf, Scen3_GravitationalPotentialEnergy_rect)
 
-    Scen3_InitialVelocityStat_surf = DistanceFromGround_font.render("Initial Velocity: " + f'{round(abs(Scen2_InitialVelocityStat), 1)}' + " m/s [U]", False, (255, 255, 255))
+    Scen3_InitialVelocityStat_surf = DistanceFromGround_font.render("Initial Velocity: " + f'{round(abs(Scen3_InitialVelocityStat), 1)}' + " m/s [U]", False, (255, 255, 255))
     Scen3_InitialVelocityStat_rect = Scen3_InitialVelocityStat_surf.get_rect(topleft=(380, 600))
     screen.blit(Scen3_InitialVelocityStat_surf, Scen3_InitialVelocityStat_rect)
 
@@ -581,24 +581,24 @@ Scen3_EndingTime = 0
 Scen3_DistanceTravelledOverall = 0
 Scen3_AngleLaunched = 45
 Scen3_InitialVelocityStat = -15
-Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat*(math.cos(Scen3_AngleLaunched * (math.pi / 180)))
-Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat*(math.sin(Scen3_AngleLaunched) * (math.pi / 180))
-Scen2_InitialVerticalVelocityStat = Scen2_InitialVelocityStat*(math.sin(Scen3_AngleLaunched * (math.pi / 180)))
-Scen2_FinalVerticalVelocityStat = math.sqrt((Scen2_InitialVerticalVelocityStat * Scen2_InitialVerticalVelocityStat) + (2 * Scen3_GravityValue * Scen3_InitialDistanceFromGroundValue))
-Scen2_EstimatedAirTime = (Scen2_FinalVerticalVelocityStat - Scen2_InitialVerticalVelocityStat)/Scen3_GravityValue
-Scen2_EstimatedDistance = Scen2_EstimatedAirTime * Scen2_HorizontalVelocityAtBeginningOfFrame
-Scen2_MaxHeight = 0
-Scen2_DistanceTravelledx = 0
-Scen2_FinalVelocity = 0
+Scen3_HorizontalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat*(math.cos(Scen3_AngleLaunched * (math.pi / 180)))
+Scen3_VerticalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat*(math.sin(Scen3_AngleLaunched) * (math.pi / 180))
+Scen3_InitialVerticalVelocityStat = Scen3_InitialVelocityStat*(math.sin(Scen3_AngleLaunched * (math.pi / 180)))
+Scen3_FinalVerticalVelocityStat = math.sqrt((Scen3_InitialVerticalVelocityStat * Scen3_InitialVerticalVelocityStat) + (2 * Scen3_GravityValue * Scen3_InitialDistanceFromGroundValue))
+Scen3_EstimatedAirTime = (Scen3_FinalVerticalVelocityStat - Scen3_InitialVerticalVelocityStat)/Scen3_GravityValue
+Scen3_EstimatedDistance = Scen3_EstimatedAirTime * Scen2_HorizontalVelocityAtBeginningOfFrame
+Scen3_MaxHeight = 0
+Scen3_DistanceTravelledx = 0
+Scen3_FinalVelocity = 0
 
-Scen2_DisplacementxStat = 0
-Scen2_DisplacementyStat = 0
-Scen2_PowerValue = 0
-Scen2_ResultantDisplacementAmplitudeStat = 0
-Scen2_ResultantDisplacementAngleStat = 0
-Scen2_TotalEnergy = 0
-Scen2_KineticEnergy = 0
-Scen2_GravitationalEnergy = 0
+Scen3_DisplacementxStat = 0
+Scen3_DisplacementyStat = 0
+Scen3_PowerValue = 0
+Scen3_ResultantDisplacementAmplitudeStat = 0
+Scen3_ResultantDisplacementAngleStat = 0
+Scen3_TotalEnergy = 0
+Scen3_KineticEnergy = 0
+Scen3_GravitationalEnergy = 0
 
 # Intro Screen
 title_surf = title_font.render("Simulated Physics Environment", False, (255, 255, 255))
@@ -983,15 +983,15 @@ while True:
                 Scen3_CurrentDistanceFromLeft = 1020
                 Scen3_DistanceTravelledVERTDuringFrame = 0
                 Scen3_DistanceTravelledHORIZDuringFrame = 0
-                Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.cos(Scen3_AngleLaunched * (math.pi / 180)))
-                Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.sin(Scen3_AngleLaunched * (math.pi / 180)))
+                Scen3_HorizontalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.cos(Scen3_AngleLaunched * (math.pi / 180)))
+                Scen2_VerticalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.sin(Scen3_AngleLaunched * (math.pi / 180)))
 
                 Scen3_SpeedAtEndOfFrame = 0
                 Scen3_CurrentDistanceFromGround = Scen3_DistanceFromGroundValue
                 Scen3_TimeAtBeginningOfFrame = 0
                 Scen3_DistanceTravelledOverall = 0
-                Scen2_DisplacementxStat = 0
-                Scen2_DisplacementyStat = 0
+                Scen3_DisplacementxStat = 0
+                Scen3_DisplacementyStat = 0
 
             if event.type == pygame.MOUSEBUTTONDOWN and Scen3_StopButton_rect.collidepoint(mouse_pos):
                 if Scen3_MassHeight < Scen3_DistanceTravelledVERTDuringFrame:
@@ -1002,15 +1002,15 @@ while True:
                     Scen3_CurrentDistanceFromLeft = 1020
                     Scen3_DistanceTravelledVERTDuringFrame = 0
                     Scen3_DistanceTravelledHORIZDuringFrame = 0
-                    Scen2_HorizontalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.cos(Scen3_AngleLaunched * (math.pi / 180)))
-                    Scen2_VerticalVelocityAtBeginningOfFrame = Scen2_InitialVelocityStat * (math.sin(Scen3_AngleLaunched * (math.pi / 180)))
+                    Scen3_HorizontalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.cos(Scen3_AngleLaunched * (math.pi / 180)))
+                    Scen3_VerticalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.sin(Scen3_AngleLaunched * (math.pi / 180)))
 
                     Scen3_SpeedAtEndOfFrame = 0
                     Scen3_CurrentDistanceFromGround = Scen3_DistanceFromGroundValue
                     Scen3_TimeAtBeginningOfFrame = 0
                     Scen3_DistanceTravelledOverall = 0
-                    Scen2_DisplacementxStat = 0
-                    Scen2_DisplacementyStat = 0
+                    Scen3_DisplacementxStat = 0
+                    Scen3_DisplacementyStat = 0
 
     if ScenarioSelect_active:
         pygame.draw.rect(screen, '#000000', ((0, 0), (1200, 700)), 0, 1)
