@@ -497,6 +497,7 @@ ScenarioOneAction = False
 ScenarioTwo_active = False
 ScenarioTwoAction = False
 ScenarioThree_active = False
+ScenarioThreeAction = False
 ScenarioSelect_active = True
 start_time = 0
 
@@ -1061,6 +1062,7 @@ while True:
         Scen2_Cannon_b = 70 * (math.cos(Scen2_AngleLaunched * (math.pi / 180)))
         Scen2_CannonEndx = 1020 - Scen2_Cannon_b
         Scen2_CannonEndy = 170 - Scen2_Cannon_a
+
         if ScenarioTwoAction:
             pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
             display_Scenario2()
@@ -1133,12 +1135,75 @@ while True:
             start_time = pygame.time.get_ticks()
 
     if ScenarioThree_active:
-        if Scenario3Action:
+        Scen2_Cannon_a = 70 * (math.sin(Scen2_AngleLaunched * (math.pi / 180)))
+        Scen2_Cannon_b = 70 * (math.cos(Scen2_AngleLaunched * (math.pi / 180)))
+        Scen2_CannonEndx = 1020 - Scen2_Cannon_b
+        Scen2_CannonEndy = 170 - Scen2_Cannon_a
+
+        if ScenarioThreeAction:
             pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
             display_Scenario3()
             Scenario3Action()
             Scen3_current_time = pygame.time.get_ticks() - start_time
 
+            if Scen3_MassHeight < Scen3_HeightOfFloor and Scen3_CurrentDistanceFromGround > Scen3_DistanceTravelledVERTDuringFrame:
+                #  VERT
+                Scen3_DistanceTravelledVERTDuringFrame = (Scen3_VerticalVelocityAtBeginningOfFrame * 0.05) + (0.5 * Scen3_GravityValue * (0.05 * 0.05))
+                Scen3_SpeedAtEndOfFrame = ((2 * Scen3_DistanceTravelledVERTDuringFrame) / 0.05) - Scen3_VerticalVelocityAtBeginningOfFrame
+                Scen3_DistanceTravelledToPx = Scen3_DistanceTravelledVERTDuringFrame / (Scen3_DistanceFromGroundValue / 247)
+                Scen3_MassHeight += Scen3_DistanceTravelledToPx
+
+                Scen3_current_time = pygame.time.get_ticks() - start_time
+                Scen3_DifferenceInTime = Scen3_current_time - Scen3_TimeAtBeginningOfFrame
+                Scen3_FinalTime = Scen3_current_time - Scen3_DifferenceInTime
+
+                Scen3_VerticalVelocityAtBeginningOfFrame = Scen3_SpeedAtEndOfFrame
+                Scen3_TimeAtBeginningOfFrame = Scen3_current_time
+                Scen3_CurrentDistanceFromGround -= Scen3_DistanceTravelledVERTDuringFrame
+                Scen3_EndingTime = Scen2_FinalTime / 1000
+                Scen3_DistanceTravelledOverall = Scen3_InitialDistanceFromGroundValue - Scen3_CurrentDistanceFromGround
+                Scen3_DisplacementyStat += abs(Scen3_DistanceTravelledVERTDuringFrame)
+
+                #  HORIZ
+                Scen3_HorizontalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.cos(Scen3_AngleLaunched * (math.pi / 180)))
+                Scen3_InitialVerticalVelocityStat = Scen3_InitialVelocityStat * (math.sin(Scen3_AngleLaunched * (math.pi / 180)))
+                Scen3_FinalVerticalVelocityStat = math.sqrt((Scen2_InitialVerticalVelocityStat * Scen3_InitialVerticalVelocityStat) + (2 * Scen3_GravityValue * Scen3_InitialDistanceFromGroundValue))
+                Scen3_EstimatedAirTime = (Scen3_FinalVerticalVelocityStat - Scen3_InitialVerticalVelocityStat) / Scen3_GravityValue
+                Scen3_TotalDisplacementx = Scen3_HorizontalVelocityAtBeginningOfFrame*Scen3_EstimatedAirTime
+                Scen3_HorizontalNumberOfFrames = Scen3_EstimatedAirTime / (1/20)
+                Scen3_DistanceTravelledHORIZDuringFrame = Scen3_TotalDisplacementx / Scen3_HorizontalNumberOfFrames
+                Scen3_DistanceTravelledHORIZToPx = Scen3_DistanceTravelledHORIZDuringFrame / 0.08
+                Scen3_CurrentDistanceFromLeft -= abs(Scen3_DistanceTravelledHORIZToPx)
+                Scen3_DisplacementxStat += abs(Scen3_DistanceTravelledHORIZDuringFrame)
+                Scen3_EstimatedDistance = Scen3_EstimatedAirTime * Scen3_HorizontalVelocityAtBeginningOfFrame
+                Scen3_EstimatedDistanceToPx = Scen3_EstimatedDistance / 0.136
+
+                #  Random
+                Scen3_Cannon_a = Scen3_AngleLaunched
+                Scen3_Cannon_b = 0
+                Scen3_FinalVelocity = math.sqrt((Scen3_FinalVerticalVelocityStat*Scen3_FinalVerticalVelocityStat)+(abs(Scen3_HorizontalVelocityAtBeginningOfFrame)*abs(Scen3_HorizontalVelocityAtBeginningOfFrame)))
+                Scen3_PowerValue = (0.5*Scen3_MassDroppedValue*(Scen3_InitialVelocityStat*Scen3_InitialVelocityStat))/1
+                Scen3_MaxHeight = ((-(Scen3_InitialVerticalVelocityStat*Scen3_InitialVerticalVelocityStat))/-(Scen3_GravityValue*2))+Scen3_DistanceFromGroundValue
+                Scen3_DistanceTravelledx = Scen3_EstimatedAirTime*Scen3_HorizontalVelocityAtBeginningOfFrame
+                Scen3_ResultantDisplacementAmplitudeStat = math.sqrt((Scen3_DistanceFromGroundValue*Scen3_DistanceFromGroundValue)+(Scen3_DistanceTravelledx*Scen3_DistanceTravelledx))
+                Scen3_ResultantDisplacementAngleStat = (math.atan(abs(Scen3_DistanceTravelledx)/Scen3_DistanceFromGroundValue)*180/math.pi)
+                Scen3_TotalEnergy = (10*Scen3_GravityValue*Scen3_DistanceFromGroundValue) + (0.5*10*(Scen3_InitialVelocityStat*Scen3_InitialVelocityStat))
+                Scen3_KineticEnergy = Scen3_TotalEnergy - (10*Scen3_GravityValue*Scen3_CurrentDistanceFromGround)
+                Scen3_GravitationalEnergy = Scen3_TotalEnergy - Scen3_KineticEnergy
+            else:
+                Scen3_ExtraDistance = Scen3_HeightOfFloor - Scen3_MassHeight
+                Scen3_ExtraTime = 0.05 * Scen3_ExtraDistance
+                Scen3_CurrentDistanceFromGround -= Scen3_CurrentDistanceFromGround
+                Scen3_MassHeight += Scen3_ExtraDistance
+                Scen3_FinalTime += Scen3_ExtraTime * 100
+                Scen3_EndingTime = Scen3_FinalTime / 1000
+                Scen3_DistanceTravelledOverall = Scen3_InitialDistanceFromGroundValue - Scen3_CurrentDistanceFromGround
+                Scen3_ExtraVelocity = Scen3_VerticalVelocityAtBeginningOfFrame + (Scen3_GravityValue * Scen3_ExtraTime)
+
+                Scen3_DisplacementxStat -= abs(Scen3_EstimatedDistanceToPx - Scen3_DisplacementxStat)
+
+                Scen3_KineticEnergy = Scen3_TotalEnergy
+                Scen3_GravitationalEnergy = 0
         else:
             pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
             display_Scenario3()
