@@ -127,7 +127,7 @@ def Scenario1ValuesUpdate():
     pygame.draw.line(screen, '#000000', (1000, 20), (1005, 30), 3)
 
 
-def ScenarioOneAction():
+def Scenario1Action():
     pygame.draw.circle(screen, '#ffffff', (600, Scen1_DroppedMassHeight), 30)
     pygame.draw.rect(screen, '#000000', ((840, 550), (170, 100)))
 
@@ -283,7 +283,7 @@ def Scenario2ValuesUpdate():
     screen.blit(Scen2_PowerStat_surf, Scen2_PowerStat_rect)
 
 
-def ScenarioTwoAction():
+def Scenario2Action():
     pygame.draw.circle(screen, '#ffffff', (Scen2_CurrentDistanceFromLeft, Scen2_MassHeight), 15)
     pygame.draw.rect(screen, '#000000', ((1000, 530), (170, 80)))
 
@@ -420,7 +420,7 @@ def Scenario3ValuesUpdate():
     screen.blit(Scen3_PowerStat_surf, Scen3_PowerStat_rect)
 
 
-def ScenarioThreeAction():
+def Scenario3Action():
     print("HI")
     pygame.draw.circle(screen, '#ffffff', (Scen3_CurrentDistanceFromLeft, Scen3_MassHeight), 15)
     pygame.draw.rect(screen, '#000000', ((1000, 530), (170, 80)))
@@ -1039,7 +1039,8 @@ while True:
                 ScenarioSelect_active = True
 
             if event.type == pygame.MOUSEBUTTONDOWN and Scen3_StartButton_rect.collidepoint(mouse_pos) and ScenarioThreeAction == False:
-                ScenarioThreeAction = True
+                Scenario3Action = True
+                print("Hello")
 
                 Scen3_MassHeight = 170
                 Scen3_CurrentDistanceFromLeft = 1020
@@ -1126,7 +1127,7 @@ while True:
         if ScenarioOneAction:
             pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
             display_Scenario1()
-            ScenarioOneAction()
+            Scenario1Action()
             Scen1_current_time = pygame.time.get_ticks() - start_time
 
             if Scen1_DroppedMassHeight < 366 and Scen1_CurrentDistanceFromGround > Scen1_DistanceTravelledDuringFrame:
@@ -1170,7 +1171,7 @@ while True:
         if ScenarioTwoAction:
             pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
             display_Scenario2()
-            ScenarioTwoAction()
+            Scenario2Action()
             Scen2_current_time = pygame.time.get_ticks() - start_time
 
 
