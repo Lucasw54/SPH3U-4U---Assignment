@@ -127,7 +127,7 @@ def Scenario1ValuesUpdate():
     pygame.draw.line(screen, '#000000', (1000, 20), (1005, 30), 3)
 
 
-def Scenario1Action():
+def ScenarioOneAction():
     pygame.draw.circle(screen, '#ffffff', (600, Scen1_DroppedMassHeight), 30)
     pygame.draw.rect(screen, '#000000', ((840, 550), (170, 100)))
 
@@ -283,7 +283,7 @@ def Scenario2ValuesUpdate():
     screen.blit(Scen2_PowerStat_surf, Scen2_PowerStat_rect)
 
 
-def Scenario2Action():
+def ScenarioTwoAction():
     pygame.draw.circle(screen, '#ffffff', (Scen2_CurrentDistanceFromLeft, Scen2_MassHeight), 15)
     pygame.draw.rect(screen, '#000000', ((1000, 530), (170, 80)))
 
@@ -356,12 +356,12 @@ def display_Scenario3():
     screen.blit(Scen3_StopButton_surf, Scen3_StopButton_rect)
 
 def Scenario3ValuesUpdate():
-    screen.blit(Scen2_UpArrowAngle_surf, Scen2_UpArrowAngle_rect)
-    screen.blit(Scen2_DownArrowAngle_surf, Scen2_DownArrowAngle_rect)
-    screen.blit(Scen2_UpArrowInitialVelocity_surf, Scen2_UpArrowInitialVelocity_rect)
-    screen.blit(Scen2_DownArrowInitialVelocity_surf, Scen2_DownArrowInitialVelocity_rect)
-    screen.blit(Scen2_UpArrowGravity_surf, Scen2_UpArrowGravity_rect)
-    screen.blit(Scen2_DownArrowGravity_surf, Scen2_DownArrowGravity_rect)
+    screen.blit(Scen3_UpArrowAngle_surf, Scen3_UpArrowAngle_rect)
+    screen.blit(Scen3_DownArrowAngle_surf, Scen3_DownArrowAngle_rect)
+    screen.blit(Scen3_UpArrowInitialVelocity_surf, Scen3_UpArrowInitialVelocity_rect)
+    screen.blit(Scen3_DownArrowInitialVelocity_surf, Scen3_DownArrowInitialVelocity_rect)
+    screen.blit(Scen3_UpArrowGravity_surf, Scen3_UpArrowGravity_rect)
+    screen.blit(Scen3_DownArrowGravity_surf, Scen3_DownArrowGravity_rect)
 
     Scen3_AngleNum_surf = Value_font.render(f'{Scen3_AngleLaunched}', False, (255, 255, 255))
     Scen3_AngleNum_rect = Scen3_AngleNum_surf.get_rect(topleft=(20, 614))
@@ -420,7 +420,7 @@ def Scenario3ValuesUpdate():
     screen.blit(Scen3_PowerStat_surf, Scen3_PowerStat_rect)
 
 
-def Scenario3Action():
+def ScenarioThreeAction():
     print("HI")
     pygame.draw.circle(screen, '#ffffff', (Scen3_CurrentDistanceFromLeft, Scen3_MassHeight), 15)
     pygame.draw.rect(screen, '#000000', ((1000, 530), (170, 80)))
@@ -809,6 +809,67 @@ Scen3_StopButton_surf = pygame.image.load('Graphics/Buttons/Stop.png').convert_a
 Scen3_StopButton_surf = pygame.transform.scale(Scen3_StopButton_surf, (180, 90))
 Scen3_StopButton_rect = Scen3_StopButton_surf.get_rect(topleft=(1000, 600))
 
+Scen3_Compass_surf = pygame.image.load('Graphics/Scenario2/Compass.png').convert_alpha()
+Scen3_Compass_surf = pygame.transform.scale(Scen3_Compass_surf, (120, 104))
+Scen3_Compass_rect = Scen3_Compass_surf.get_rect(topleft=(220, 10))
+
+Scen3_ground_surf = pygame.image.load('Graphics/Ground.png').convert_alpha()
+Scen3_ground_surf = pygame.transform.scale(Scen3_ground_surf, (1200, 300))
+Scen3_ground_rect = Scen3_ground_surf.get_rect(topleft=(0, 300))
+
+Scen3_BackButton_surf = pygame.image.load('Graphics/Buttons/Back.png').convert_alpha()
+Scen3_BackButton_surf = pygame.transform.scale(Scen3_BackButton_surf, (150, 70))
+Scen3_BackButton_rect = Scen3_BackButton_surf.get_rect(topleft=(0, 0))
+
+Scen3_PhysicsInfo_surf = PhysicsInfo_font.render("Physics Information", False, (255, 255, 255))
+Scen3_PhysicsInfo_rect = Scen3_PhysicsInfo_surf.get_rect(topleft=(30, 535))
+
+Scen3_DistanceFromGround_surf = DistanceFromGround_font.render("Distance (m)", False, (255, 255, 255))
+Scen3_DistanceFromGround_rect = Scen3_DistanceFromGround_surf.get_rect(topleft=(50, 593))
+
+Scen3_UpArrowDistance_surf = pygame.image.load('Graphics/UpAndDownArrows/UpArrow.png').convert_alpha()
+Scen3_UpArrowDistance_surf = pygame.transform.scale(Scen3_UpArrowDistance_surf, (80, 30))
+Scen3_UpArrowDistance_rect = Scen3_UpArrowDistance_surf.get_rect(topleft=(0, 575))
+
+Scen3_DownArrowDistance_surf = pygame.image.load('Graphics/UpAndDownArrows/DownArrow.png').convert_alpha()
+Scen3_DownArrowDistance_surf = pygame.transform.scale(Scen3_DownArrowDistance_surf, (80, 30))
+Scen3_DownArrowDistance_rect = Scen3_DownArrowDistance_surf.get_rect(topleft=(-18, 605))
+
+Scen3_Angle_surf = DistanceFromGround_font.render("Angle (°)", False, (255, 255, 255))
+Scen3_Angle_rect = Scen3_Angle_surf.get_rect(topleft=(50, 615))
+
+Scen3_UpArrowAngle_surf = pygame.image.load('Graphics/UpAndDownArrows/UpArrow.png').convert_alpha()
+Scen3_UpArrowAngle_surf = pygame.transform.scale(Scen3_UpArrowAngle_surf, (80, 30))
+Scen3_UpArrowAngle_rect = Scen3_UpArrowAngle_surf.get_rect(topleft=(0, 595))
+
+Scen3_DownArrowAngle_surf = pygame.image.load('Graphics/UpAndDownArrows/DownArrow.png').convert_alpha()
+Scen3_DownArrowAngle_surf = pygame.transform.scale(Scen3_DownArrowAngle_surf, (80, 30))
+Scen3_DownArrowAngle_rect = Scen3_DownArrowAngle_surf.get_rect(topleft=(-18, 625))
+
+Scen3_InitialVelocity_surf = DistanceFromGround_font.render("Initial Velocity (m/s)", False, (255, 255, 255))
+Scen3_InitialVelocity_rect = Scen3_InitialVelocity_surf.get_rect(topleft=(180, 593))
+
+Scen3_InitialVelocityMeasurementUnits_surf = Value_font.render("m/s", False, (0, 0, 0))
+Scen3_InitialVelocityMeasurementUnits_rect = Scen3_InitialVelocityMeasurementUnits_surf.get_rect(topleft=(605, 15))
+
+Scen3_UpArrowInitialVelocity_surf = pygame.image.load('Graphics/UpAndDownArrows/UpArrow.png').convert_alpha()
+Scen3_UpArrowInitialVelocity_surf = pygame.transform.scale(Scen3_UpArrowInitialVelocity_surf, (80, 30))
+Scen3_UpArrowInitialVelocity_rect = Scen3_UpArrowInitialVelocity_surf.get_rect(topleft=(130, 575))
+
+Scen3_DownArrowInitialVelocity_surf = pygame.image.load('Graphics/UpAndDownArrows/DownArrow.png').convert_alpha()
+Scen3_DownArrowInitialVelocity_surf = pygame.transform.scale(Scen3_DownArrowInitialVelocity_surf, (80, 30))
+Scen3_DownArrowInitialVelocity_rect = Scen3_DownArrowInitialVelocity_surf.get_rect(topleft=(112, 605))
+
+Scen3_Gravity_surf = DistanceFromGround_font.render("Gravity (m/s^2)", False, (255, 255, 255))
+Scen3_Gravity_rect = Scen3_Gravity_surf.get_rect(topleft=(180, 643))
+
+Scen3_UpArrowGravity_surf = pygame.image.load('Graphics/UpAndDownArrows/UpArrow.png').convert_alpha()
+Scen3_UpArrowGravity_surf = pygame.transform.scale(Scen3_UpArrowGravity_surf, (80, 30))
+Scen3_UpArrowGravity_rect = Scen3_UpArrowGravity_surf.get_rect(topleft=(130, 625))
+
+Scen3_DownArrowGravity_surf = pygame.image.load('Graphics/UpAndDownArrows/DownArrow.png').convert_alpha()
+Scen3_DownArrowGravity_surf = pygame.transform.scale(Scen3_DownArrowGravity_surf, (80, 30))
+Scen3_DownArrowGravity_rect = Scen3_DownArrowGravity_surf.get_rect(topleft=(112, 655))
 
 while True:
     for event in pygame.event.get():
@@ -977,15 +1038,15 @@ while True:
                 pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
                 ScenarioSelect_active = True
 
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen3_StartButton_rect.collidepoint(mouse_pos) and ScenarioTwoAction == False:
-                Scenario3Action = True
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen3_StartButton_rect.collidepoint(mouse_pos) and ScenarioThreeAction == False:
+                ScenarioThreeAction = True
 
                 Scen3_MassHeight = 170
                 Scen3_CurrentDistanceFromLeft = 1020
                 Scen3_DistanceTravelledVERTDuringFrame = 0
                 Scen3_DistanceTravelledHORIZDuringFrame = 0
                 Scen3_HorizontalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.cos(Scen3_AngleLaunched * (math.pi / 180)))
-                Scen2_VerticalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.sin(Scen3_AngleLaunched * (math.pi / 180)))
+                Scen3_VerticalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.sin(Scen3_AngleLaunched * (math.pi / 180)))
 
                 Scen3_SpeedAtEndOfFrame = 0
                 Scen3_CurrentDistanceFromGround = Scen3_DistanceFromGroundValue
@@ -996,9 +1057,11 @@ while True:
 
             if event.type == pygame.MOUSEBUTTONDOWN and Scen3_StopButton_rect.collidepoint(mouse_pos):
                 if Scen3_MassHeight < Scen3_DistanceTravelledVERTDuringFrame:
-                    Scenario3Action = False
+                    ScenarioThreeAction = False
+                    print("Bye")
                 else:
-                    Scenario3Action = False
+                    print("HI")
+                    ScenarioThreeAction = False
                     Scen3_MassHeight = 170
                     Scen3_CurrentDistanceFromLeft = 1020
                     Scen3_DistanceTravelledVERTDuringFrame = 0
@@ -1013,6 +1076,47 @@ while True:
                     Scen3_DisplacementxStat = 0
                     Scen3_DisplacementyStat = 0
 
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen3_UpArrowAngle_rect.collidepoint(mouse_pos) and Scen3_AngleLaunched < 90 and ScenarioThreeAction == False:
+                Scen3_AngleLaunched += 1
+                Scen3_HorizontalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.cos(Scen3_AngleLaunched * (math.pi / 180)))
+                Scen3_VerticalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.sin(Scen3_AngleLaunched * (math.pi / 180)))
+
+                Scen3_HorizontalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.cos(Scen3_AngleLaunched * (math.pi / 180)))
+                Scen3_VerticalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.sin(Scen3_AngleLaunched) * (math.pi / 180))
+                Scen3_InitialVerticalVelocityStat = Scen3_InitialVelocityStat * (math.sin(Scen3_AngleLaunched * (math.pi / 180)))
+                Scen3_FinalVerticalVelocityStat = math.sqrt((Scen3_InitialVerticalVelocityStat * Scen3_InitialVerticalVelocityStat) + (2 * Scen3_GravityValue * Scen3_InitialDistanceFromGroundValue))
+                Scen3_EstimatedAirTime = (Scen3_FinalVerticalVelocityStat - Scen3_InitialVerticalVelocityStat) / Scen3_GravityValue
+                Scen3_EstimatedDistance = Scen3_EstimatedAirTime * Scen3_HorizontalVelocityAtBeginningOfFrame
+
+
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen3_DownArrowAngle_rect.collidepoint(mouse_pos) and Scen3_AngleLaunched > 0 and ScenarioThreeAction == False:
+                Scen3_AngleLaunched -= 1
+                Scen3_HorizontalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.cos(Scen3_AngleLaunched * (math.pi / 180)))
+                Scen3_VerticalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.sin(Scen3_AngleLaunched * (math.pi / 180)))
+
+                Scen3_HorizontalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.cos(Scen3_AngleLaunched * (math.pi / 180)))
+                Scen3_VerticalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.sin(Scen3_AngleLaunched) * (math.pi / 180))
+                Scen3_InitialVerticalVelocityStat = Scen3_InitialVelocityStat * (math.sin(Scen3_AngleLaunched * (math.pi / 180)))
+                Scen3_FinalVerticalVelocityStat = math.sqrt((Scen3_InitialVerticalVelocityStat * Scen3_InitialVerticalVelocityStat) + (2 * Scen3_GravityValue * Scen3_InitialDistanceFromGroundValue))
+                Scen3_EstimatedAirTime = (Scen3_FinalVerticalVelocityStat - Scen3_InitialVerticalVelocityStat) / Scen3_GravityValue
+                Scen3_EstimatedDistance = Scen3_EstimatedAirTime * Scen3_HorizontalVelocityAtBeginningOfFrame
+
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen3_UpArrowInitialVelocity_rect.collidepoint(mouse_pos) and ScenarioThreeAction == False:
+                Scen3_InitialVelocityStat -= 1
+                Scen3_VerticalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat*(math.sin(Scen3_AngleLaunched * (math.pi / 180)))
+                Scen3_HorizontalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.cos(Scen3_AngleLaunched) * (math.pi / 180))
+
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen3_DownArrowInitialVelocity_rect.collidepoint(mouse_pos) and abs(Scen3_InitialVelocityStat) > 0 and ScenarioThreeAction == False:
+                Scen3_InitialVelocityStat += 1
+                Scen3_VerticalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat*(math.sin(Scen3_AngleLaunched * (math.pi / 180)))
+                Scen3_HorizontalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.cos(Scen3_AngleLaunched * (math.pi / 180)))
+
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen3_UpArrowGravity_rect.collidepoint(mouse_pos) and ScenarioThreeAction == False:
+                Scen3_GravityValue += 0.1
+
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen3_DownArrowGravity_rect.collidepoint(mouse_pos) and Scen3_GravityValue > 0.2 and ScenarioThreeAction == False:
+                Scen3_GravityValue -= 0.1
+
     if ScenarioSelect_active:
         pygame.draw.rect(screen, '#000000', ((0, 0), (1200, 700)), 0, 1)
         pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 110, 1)
@@ -1022,7 +1126,7 @@ while True:
         if ScenarioOneAction:
             pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
             display_Scenario1()
-            Scenario1Action()
+            ScenarioOneAction()
             Scen1_current_time = pygame.time.get_ticks() - start_time
 
             if Scen1_DroppedMassHeight < 366 and Scen1_CurrentDistanceFromGround > Scen1_DistanceTravelledDuringFrame:
@@ -1066,7 +1170,7 @@ while True:
         if ScenarioTwoAction:
             pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
             display_Scenario2()
-            Scenario2Action()
+            ScenarioTwoAction()
             Scen2_current_time = pygame.time.get_ticks() - start_time
 
 
@@ -1143,7 +1247,7 @@ while True:
         if ScenarioThreeAction:
             pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
             display_Scenario3()
-            Scenario3Action()
+            ScenarioThreeAction()
             Scen3_current_time = pygame.time.get_ticks() - start_time
 
             if Scen3_MassHeight < Scen3_HeightOfFloor and Scen3_CurrentDistanceFromGround > Scen3_DistanceTravelledVERTDuringFrame:
