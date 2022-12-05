@@ -352,6 +352,14 @@ def display_Scenario3():
     screen.blit(Scen1_PhysicsInfo_surf, Scen1_PhysicsInfo_rect)
     pygame.draw.line(screen, '#ffffff', (25, 570), (290, 570), 4)
 
+    #Person Jumping
+    pygame.draw.circle(screen, '#ffffff', (Scen3_CurrentDistanceFromLeft, Scen3_MassHeight), 15)
+
+    #Height Measurement Lines
+    pygame.draw.line(screen, '#ffffff', (650, 68), (650, 432), 4)
+    pygame.draw.line(screen, '#ffffff', (625, 432), (675, 432), 4)
+    pygame.draw.line(screen, '#ffffff', (625, 68), (675, 68), 4)
+
     screen.blit(Scen3_StartButton_surf, Scen3_StartButton_rect)
     screen.blit(Scen3_StopButton_surf, Scen3_StopButton_rect)
 
@@ -363,9 +371,19 @@ def Scenario3ValuesUpdate():
     screen.blit(Scen3_UpArrowGravity_surf, Scen3_UpArrowGravity_rect)
     screen.blit(Scen3_DownArrowGravity_surf, Scen3_DownArrowGravity_rect)
 
+    Scen3_DistanceFromGroundMeasurement_surf = Value_font.render(f'{Scen3_DistanceFromGroundValue}' + " m", False, (0, 0, 0))
+    Scen3_DistanceFromGroundMeasurement_rect = Scen3_DistanceFromGroundMeasurement_surf.get_rect(topleft=(675, 230))
+    screen.blit(Scen3_DistanceFromGroundMeasurement_surf, Scen3_DistanceFromGroundMeasurement_rect)
+
+    ##Change to more relevant variable
     Scen3_AngleNum_surf = Value_font.render(f'{Scen3_AngleLaunched}', False, (255, 255, 255))
     Scen3_AngleNum_rect = Scen3_AngleNum_surf.get_rect(topleft=(20, 614))
     screen.blit(Scen3_AngleNum_surf, Scen3_AngleNum_rect)
+
+    ##Update
+    Scen3_MassDroppedMeasurement_surf = Small_font.render(f'{Scen3_MassDroppedValue}' + " Kg", False, (0, 0, 0))
+    Scen3_MassDroppedMeasurement_rect = Scen3_MassDroppedMeasurement_surf.get_rect(topleft=(Scen3_CurrentDistanceFromLeft - 10, Scen3_MassHeight - 5))
+    screen.blit(Scen3_MassDroppedMeasurement_surf, Scen3_MassDroppedMeasurement_rect)
 
     Scen3_InitialVelocityNum_surf = Value_font.render(f'{abs(Scen3_InitialVelocityStat)}', False, (255, 255, 255))
     Scen3_InitialVelocityNum_rect = Scen3_InitialVelocityNum_surf.get_rect(topleft=(150, 593))
@@ -421,7 +439,6 @@ def Scenario3ValuesUpdate():
 
 
 def Scenario3Action():
-    print("HI")
     pygame.draw.circle(screen, '#ffffff', (Scen3_CurrentDistanceFromLeft, Scen3_MassHeight), 15)
     pygame.draw.rect(screen, '#000000', ((1000, 530), (170, 80)))
 
@@ -562,10 +579,10 @@ Scen2_KineticEnergy = 0
 Scen2_GravitationalEnergy = 0
 
 # Scenario Three Variables
-Scen3_MassHeight = 170
-Scen3_CurrentDistanceFromLeft = 1020
+Scen3_MassHeight = 53
+Scen3_CurrentDistanceFromLeft = 600
 Scen3_InitialDistanceFromGroundValue = 20
-Scen3_DistanceFromGroundValue = 20
+Scen3_DistanceFromGroundValue = 30
 Scen3_MassDroppedValue = 10
 Scen3_HeightOfFloor = 417
 Scen3_DistanceTravelledVERTDuringFrame = 0
@@ -1033,7 +1050,7 @@ while True:
 
         if ScenarioThree_active:
             mouse_pos = pygame.mouse.get_pos()
-            if event.type == pygame.MOUSEBUTTONDOWN and Scen1_BackButton_rect.collidepoint(mouse_pos):
+            if event.type == pygame.MOUSEBUTTONDOWN and Scen3_BackButton_rect.collidepoint(mouse_pos):
                 ScenarioThree_active = False
                 pygame.draw.rect(screen, '#c0e8ec', ((0, 0), (1200, 700)), 1000, 1)
                 ScenarioSelect_active = True
@@ -1042,8 +1059,8 @@ while True:
                 Scenario3Action = True
                 print("Hello")
 
-                Scen3_MassHeight = 170
-                Scen3_CurrentDistanceFromLeft = 1020
+                Scen3_MassHeight = 53
+                Scen3_CurrentDistanceFromLeft = 600
                 Scen3_DistanceTravelledVERTDuringFrame = 0
                 Scen3_DistanceTravelledHORIZDuringFrame = 0
                 Scen3_HorizontalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.cos(Scen3_AngleLaunched * (math.pi / 180)))
@@ -1063,8 +1080,8 @@ while True:
                 else:
                     print("HI")
                     ScenarioThreeAction = False
-                    Scen3_MassHeight = 170
-                    Scen3_CurrentDistanceFromLeft = 1020
+                    Scen3_MassHeight = 53
+                    Scen3_CurrentDistanceFromLeft = 600
                     Scen3_DistanceTravelledVERTDuringFrame = 0
                     Scen3_DistanceTravelledHORIZDuringFrame = 0
                     Scen3_HorizontalVelocityAtBeginningOfFrame = Scen3_InitialVelocityStat * (math.cos(Scen3_AngleLaunched * (math.pi / 180)))
